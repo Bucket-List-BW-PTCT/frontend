@@ -30,15 +30,27 @@ const HeaderStyle = styled.h2`
   color: grey;
 `;
 
-const FieldDiv = styled.div``;
-
-function SignIn() {
+function SignUp() {
   return (
     <div>
       <DivStyle>
         <HeaderStyle>Sign In</HeaderStyle>
         <Form>
           <FormDiv>
+            <Field
+              className="userInfo"
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+            />
+
+            <Field
+              className="userInfo"
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+            />
+
             <Field
               className="userInfo"
               type="text"
@@ -60,7 +72,7 @@ function SignIn() {
   );
 }
 
-const SignInFormikForm = withFormik({
+const FormikSignUpForm = withFormik({
   mapPropsToValues({ firstName, lastName, username, password }) {
     return {
       firstName: firstName || "",
@@ -83,5 +95,6 @@ const SignInFormikForm = withFormik({
         resetForm();
       });
   }
-})(SignIn);
-export default SignInFormikForm;
+})(SignUp);
+
+export default FormikSignUpForm;
