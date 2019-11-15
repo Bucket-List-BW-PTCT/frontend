@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux';
+import ListTile from './components/ListTile';
+import Navbar from './components/Navbar';
+import { Route } from 'react-router-dom';
 import './App.css';
 
-function App() {
+function App(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Navbar />
+
+      <Route exact path='/bucket-lists' render={() => (
+        <div className='App'>
+          <h1>Bucket Lists</h1>
+
+          <div className='list-wrapper'>
+            {props.bucketLists.map((list) => (
+              <ListTile key={list.id} {...list} />
+            ))}
+          </div>
+        </div>
+      )} />
     </div>
   );
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    ...state,
+    bucketLists: [
+      ...state.bucketLists
+    ]
+  }
+}
+
+const mapDispatchToProps = {
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
