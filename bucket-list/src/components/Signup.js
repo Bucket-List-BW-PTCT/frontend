@@ -30,31 +30,45 @@ const HeaderStyle = styled.h2`
   color: grey;
 `;
 
-function SignIn(errors, touched) {
+function Signup(errors, touched) {
   return (
     <div>
       <DivStyle>
-        <HeaderStyle>Sign In</HeaderStyle>
+        <HeaderStyle>Sign Up</HeaderStyle>
         <Form>
-          <FormDiv>
-            {touched.username && errors.username && <p>{errors.username}</p>}
-            <Field
-              className="userInfo"
-              type="text"
-              name="username"
-              placeholder="Username or email"
-            />
-            {touched.password && errors.password && <p>{errors.password}</p>}
-            <Field
-              className="userInfo"
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
-            <button className="signInButton" type="submit">
-              Sign In
-            </button>
-          </FormDiv>
+          <Field
+            className="userInfo"
+            type="text"
+            name="firstName"
+            placeholder="Enter First Name"
+          />
+          {touched.firstName && errors.firstName && <p>{errors.firstName}</p>}
+          <Field
+            className="userInfo"
+            type="text"
+            name="lastName"
+            placeholder="Enter Last Name"
+          />
+          {touched.lastName && errors.lastName && <p>{errors.lastName}</p>}
+
+          {touched.username && errors.username && <p>{errors.username}</p>}
+          <Field
+            className="userInfo"
+            type="text"
+            name="username"
+            placeholder="Username or email"
+          />
+          {touched.password && errors.password && <p>{errors.password}</p>}
+          <Field
+            className="userInfo"
+            type="password"
+            name="password"
+            placeholder="Password"
+          />
+          <button className="signInButton" type="submit">
+            Sign In
+          </button>
+          <FormDiv />
         </Form>
       </DivStyle>
       <ParaStyle>BUCKETLIST - 2019</ParaStyle>
@@ -63,8 +77,10 @@ function SignIn(errors, touched) {
 }
 
 const FormikSignInForm = withFormik({
-  mapPropsToValues({ username, password }) {
+  mapPropsToValues({ username, password, firstname, lastname }) {
     return {
+      firstname: firstname || "",
+      lastname: lastname || "",
       username: username || "",
       password: password || ""
     };
@@ -72,6 +88,10 @@ const FormikSignInForm = withFormik({
 
   // Validation Schema
   validationSchema: Yup.object().shape({
+    firstname: Yup.string().required("Must enter first name"),
+
+    lastname: Yup.string().required("Must enter first name"),
+
     username: Yup.string()
       .email("Invalid Username")
       .required("Username Required"),
@@ -92,6 +112,6 @@ const FormikSignInForm = withFormik({
         console.log(err);
       });
   }
-})(SignIn);
+})(Signup);
 
 export default FormikSignInForm;
