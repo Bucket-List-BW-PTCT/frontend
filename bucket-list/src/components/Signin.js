@@ -4,18 +4,17 @@ import styled from "styled-components";
 
 const DivStyle = styled.div`
   margin: 10px auto;
-  width: 50%;
+  width: 500px;
   text-align: center;
   display: flex;
   flex-direction: column;
-  border: 2px solid grey;
   box-shadow: 5px 5px 8px #888888;
 `;
 
 const FormDiv = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 450px;
   margin: 5px auto;
 `;
 
