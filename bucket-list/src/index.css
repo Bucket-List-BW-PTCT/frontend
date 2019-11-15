@@ -11,3 +11,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.userInfo {
+  border-radius: 20px;
+  margin: 10px auto;
+  padding: 10px 15px;
+  width: 90%;
+  text-align: left;
+  height: 40px;
+  border: 1px solid grey;
+}
+
+.signInButton {
+  background: green;
+  color: white;
+  border-radius: 20px;
+  width: 90%;
+  height: 50px;
+  margin: 20px auto;
+  border: none;
+}
