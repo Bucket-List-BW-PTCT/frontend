@@ -1,13 +1,15 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Signin from "./components/Signin";
+import SignUp from "./components/Signup";
 
 function App() {
-  return( <div>
-    <Signin />
-  </div>
-  )
+  return (
+    <div>
+      <Signin />
+      <SignUp />
+    </div>
+  );
 }
 
 export default App;
