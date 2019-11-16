@@ -38,12 +38,14 @@ function SignIn() {
         <HeaderStyle>Sign In</HeaderStyle>
         <Form>
           <FormDiv>
+            {touched.username && errors.username && <p>{errors.username}</p>}
             <Field
               className="userInfo"
               type="text"
               name="username"
               placeholder="Username or email"
             />
+            {touched.password && errors.password && <p>{errors.password}</p>}
             <Field
               className="userInfo"
               type="password"
@@ -51,6 +53,7 @@ function SignIn() {
               placeholder="Password"
             />
             <Button color="success">Sign In</Button>
+
           </FormDiv>
         </Form>
       </DivStyle>
@@ -68,6 +71,8 @@ const SignInFormikForm = withFormik({
       password: password || ""
     };
   },
+
+
   validationSchema: Yup.object().shape({
     firstName: Yup.string().required("Please enter your first name"),
     lastName: Yup.string().required("Please enter your last name"),

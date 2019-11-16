@@ -2,8 +2,10 @@ import React from "react";
 import "./App.css";
 import Signin from "./components/Signin";
 import Navbar from "./components/Navigation/Navbar";
+import Signup from "./components/Signup";
 import BucketCounter from "./components/BucketCounter";
-import SignUp from "./components/Signup";
+
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
       {/* <Navigation /> */}
       <Signin />
       <SignUp />
+
     </div>
   );
 }

@@ -31,6 +31,7 @@ const HeaderStyle = styled.h2`
   color: grey;
 `;
 
+
 function SignUp() {
   return (
     <div>
@@ -66,12 +67,14 @@ function SignUp() {
             />
             <Button color="success">Sign In</Button>
           </FormDiv>
+    
         </Form>
       </DivStyle>
       <ParaStyle>BUCKETLIST - 2019</ParaStyle>
     </div>
   );
 }
+
 
 const FormikSignUpForm = withFormik({
   mapPropsToValues({ firstName, lastName, username, password }) {
@@ -100,3 +103,4 @@ const FormikSignUpForm = withFormik({
 })(SignUp);
 
 export default FormikSignUpForm;
+
