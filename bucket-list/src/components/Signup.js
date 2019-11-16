@@ -82,6 +82,7 @@ const FormikSignUpForm = withFormik({
       password: password || ""
     };
   },
+
   validationSchema: Yup.object().shape({
     firstName: Yup.string().required("Please enter your first name"),
     lastName: Yup.string().required("Please enter your last name"),
