@@ -2,14 +2,15 @@ import React from "react";
 import "./App.css";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
-import Navbar from "./components/Navbar";
+import Navigation from "./components/Navbar";
 
 function App() {
   return (
     <div>
-      <Navbar />
+      <Navigation />
       {/* <Signin /> */}
       <Signup />
+      <Signin />
     </div>
   );
 }
