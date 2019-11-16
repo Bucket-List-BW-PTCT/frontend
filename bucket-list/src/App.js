@@ -2,13 +2,14 @@ import React from "react";
 import "./App.css";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
-import Navigation from "./components/Navbar";
+import Navigation from "./components/Navigation/Navbar";
+import HomeNav from "./components/Navigation/HomeNav";
 
 function App() {
   return (
     <div>
-      <Navigation />
-      {/* <Signin /> */}
+      <HomeNav />
+      {/* <Navigation /> */}
       <Signup />
       <Signin />
     </div>
