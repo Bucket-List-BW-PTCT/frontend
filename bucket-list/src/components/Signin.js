@@ -31,7 +31,7 @@ const HeaderStyle = styled.h2`
   color: grey;
 `;
 
-function SignIn() {
+function SignIn(touched,errors) {
   return (
     <div>
       <DivStyle>
@@ -52,7 +52,9 @@ function SignIn() {
               name="password"
               placeholder="Password"
             />
-            <Button color="success">Sign In</Button>
+            <Button 
+            type="submit"
+            color="success">Sign In</Button>
 
           </FormDiv>
         </Form>
@@ -81,7 +83,7 @@ const SignInFormikForm = withFormik({
   }),
   handleSubmit(values, { setStatus, resetForm }) {
     axios
-      .post("https://wunderlist-2.herokuapp.com/api/auth/register", values)
+      .get("https://bucketlist-builds.herokuapp.com/users", values)
       .then(res => {
         setStatus(res.data);
         resetForm();

@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import Signin from "./components/Signin";
 import Navbar from "./components/Navigation/Navbar";
-import Signup from "./components/Signup";
+import SignUp from "./components/Signup";
 import BucketCounter from "./components/BucketCounter";
 
 
