@@ -4,18 +4,19 @@ import Signin from "./components/Signin";
 import Navbar from "./components/Navigation/Navbar";
 import SignUp from "./components/Signup";
 import BucketCounter from "./components/BucketCounter";
-
+import BucketCard from './components/BucketCard';
 
 
 function App() {
   return (
     <div>
       <Navbar />
-      <BucketCounter />
+      <BucketCard />
+      {/* <BucketCounter /> */}
       {/* <HomeNav /> */}
       {/* <Navigation /> */}
-      <Signin />
-      <SignUp />
+      {/* <Signin />
+      <SignUp /> */}
 
     </div>
   );
