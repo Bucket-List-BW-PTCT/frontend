@@ -30,6 +30,7 @@ const HeaderStyle = styled.h2`
   color: grey;
 `;
 
+
 function SignUp() {
   return (
     <div>
@@ -65,12 +66,14 @@ function SignUp() {
             />
             <button className="signInButton">Sign In</button>
           </FormDiv>
+    
         </Form>
       </DivStyle>
       <ParaStyle>BUCKETLIST - 2019</ParaStyle>
     </div>
   );
 }
+
 
 const FormikSignUpForm = withFormik({
   mapPropsToValues({ firstName, lastName, username, password }) {
@@ -81,6 +84,7 @@ const FormikSignUpForm = withFormik({
       password: password || ""
     };
   },
+  
   validationSchema: Yup.object().shape({
     firstName: Yup.string().required("Please enter your first name"),
     lastName: Yup.string().required("Please enter your last name"),
@@ -98,3 +102,4 @@ const FormikSignUpForm = withFormik({
 })(SignUp);
 
 export default FormikSignUpForm;
+
