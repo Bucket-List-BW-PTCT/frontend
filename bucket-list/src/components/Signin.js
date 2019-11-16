@@ -3,6 +3,7 @@ import { withFormik, Form, Field } from "formik";
 import styled from "styled-components";
 import * as Yup from "yup";
 import axios from "axios";
+import { Button } from "reactstrap";
 
 const DivStyle = styled.div`
   margin: 10px auto;
@@ -30,8 +31,6 @@ const HeaderStyle = styled.h2`
   color: grey;
 `;
 
-const FieldDiv = styled.div``;
-
 function SignIn() {
   return (
     <div>
@@ -51,7 +50,7 @@ function SignIn() {
               name="password"
               placeholder="Password"
             />
-            <button className="signInButton">Sign In</button>
+            <Button color="success">Sign In</Button>
           </FormDiv>
         </Form>
       </DivStyle>
