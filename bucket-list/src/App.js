@@ -6,14 +6,16 @@ import Navigation from "./components/Navigation/Navbar";
 import HomeNav from "./components/Navigation/HomeNav";
 import BucketCounter from "./components/BucketCounter";
 
+
 function App() {
   return (
     <div>
       <BucketCounter />
       {/* <HomeNav /> */}
       {/* <Navigation /> */}
-      {/* <Signup  /> */}
-      {/* <Signin /> */}
+      <Signin />
+      <SignUp />
+
     </div>
   );
 }

@@ -30,45 +30,43 @@ const HeaderStyle = styled.h2`
   color: grey;
 `;
 
-function Signup(errors, touched) {
+
+function SignUp() {
   return (
     <div>
       <DivStyle>
-        <HeaderStyle>Sign Up</HeaderStyle>
+        <HeaderStyle>Sign In</HeaderStyle>
         <Form>
-          <Field
-            className="userInfo"
-            type="text"
-            name="firstName"
-            placeholder="Enter First Name"
-          />
-          {touched.firstName && errors.firstName && <p>{errors.firstName}</p>}
-          <Field
-            className="userInfo"
-            type="text"
-            name="lastName"
-            placeholder="Enter Last Name"
-          />
-          {touched.lastName && errors.lastName && <p>{errors.lastName}</p>}
+          <FormDiv>
+            <Field
+              className="userInfo"
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+            />
 
-          {touched.username && errors.username && <p>{errors.username}</p>}
-          <Field
-            className="userInfo"
-            type="text"
-            name="username"
-            placeholder="Username or email"
-          />
-          {touched.password && errors.password && <p>{errors.password}</p>}
-          <Field
-            className="userInfo"
-            type="password"
-            name="password"
-            placeholder="Password"
-          />
-          <button className="signInButton" type="submit">
-            Sign In
-          </button>
-          <FormDiv />
+            <Field
+              className="userInfo"
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+            />
+
+            <Field
+              className="userInfo"
+              type="text"
+              name="username"
+              placeholder="Username or email"
+            />
+            <Field
+              className="userInfo"
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
+            <button className="signInButton">Sign In</button>
+          </FormDiv>
+    
         </Form>
       </DivStyle>
       <ParaStyle>BUCKETLIST - 2019</ParaStyle>
@@ -76,42 +74,32 @@ function Signup(errors, touched) {
   );
 }
 
-const FormikSignInForm = withFormik({
-  mapPropsToValues({ username, password, firstname, lastname }) {
+
+const FormikSignUpForm = withFormik({
+  mapPropsToValues({ firstName, lastName, username, password }) {
     return {
-      firstname: firstname || "",
-      lastname: lastname || "",
+      firstName: firstName || "",
+      lastName: lastName || "",
       username: username || "",
       password: password || ""
     };
   },
-
-  // Validation Schema
+  
   validationSchema: Yup.object().shape({
-    firstname: Yup.string().required("Must enter first name"),
-
-    lastname: Yup.string().required("Must enter first name"),
-
-    username: Yup.string()
-      .email("Invalid Username")
-      .required("Username Required"),
-
-    password: Yup.string()
-      .min(6)
-      .required("Password is required")
+    firstName: Yup.string().required("Please enter your first name"),
+    lastName: Yup.string().required("Please enter your last name"),
+    username: Yup.string().required("Please enter a username"),
+    password: Yup.string().required("Please enter a password")
   }),
-
-  handleSubmit(values, { setStatus }) {
+  handleSubmit(values, { setStatus, resetForm }) {
     axios
-      .post("https://bw-bucketlist.herokuapp.com/api", values)
+      .post("https://wunderlist-2.herokuapp.com/api/auth/register", values)
       .then(res => {
         setStatus(res.data);
-        console.log(`Our data:`, res.data);
-      })
-      .catch(err => {
-        console.log(err);
+        resetForm();
       });
   }
-})(Signup);
+})(SignUp);
 
-export default FormikSignInForm;
+export default FormikSignUpForm;
+
