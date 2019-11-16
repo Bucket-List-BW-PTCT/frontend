@@ -1,15 +1,16 @@
 import React from "react";
 import "./App.css";
 import Signin from "./components/Signin";
+import Navbar from "./components/Navigation/Navbar";
 import Signup from "./components/Signup";
-import Navigation from "./components/Navigation/Navbar";
-import HomeNav from "./components/Navigation/HomeNav";
 import BucketCounter from "./components/BucketCounter";
+
 
 
 function App() {
   return (
     <div>
+      <Navbar />
       <BucketCounter />
       {/* <HomeNav /> */}
       {/* <Navigation /> */}
