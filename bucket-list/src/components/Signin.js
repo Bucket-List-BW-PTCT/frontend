@@ -147,7 +147,7 @@ const formikFormSignIn = withFormik({
   }),
   handleSubmit(values, { setStatus, resetForm }) {
     axios
-      .post("https://wunderlist-2.herokuapp.com/api/auth/register", values)
+      .post("https://bw-bucketlist.herokuapp.com/api", values)
       .then(res => {
         setStatus(res.data);
         resetForm();
