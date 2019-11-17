@@ -78,10 +78,11 @@ const Login = ({
   }, [status]);
 
   return (
-    <div textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
+    <div textAlign="center" >
       <DivStyle>
+      <HeaderStyle>Sign In</HeaderStyle>
         <Form>
-  
+          <FormDiv>
             <div className="ui fluid input">
               <Field type="username" name="username" placeholder="Username" />
             </div>
@@ -99,9 +100,11 @@ const Login = ({
             <Button type="submit" fluid>
               Login
             </Button>
-
+            </FormDiv>
         </Form>
+
         </DivStyle>
+        <ParaStyle>BUCKETLIST - 2019</ParaStyle>
     </div>
   );
 };
