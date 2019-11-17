@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  margin: auto;
 }
 
 .App-logo {
@@ -19,4 +20,38 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.list-card {
+  margin: auto;
+  border: 1px solid black;
+  min-height: 10vh;
+  min-width: 20vw;
+  background-color: white;
+}
+
+.list-wrapper {
+  margin: auto;
+  border: 2px solid green;
+  max-width: 45vw;
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: lightgoldenrodyellow;
+}
+
+.nav-bar {
+  margin: auto;
+  display: flex;
+  height: 6vh;
+  width: 75vw;
+  background-color: #09d3ac;
+  justify-content: space-around;
+}
+
+.nav-link {
+  color: white;
+  font-size: 2.2rem;
+  text-decoration: none;
 }

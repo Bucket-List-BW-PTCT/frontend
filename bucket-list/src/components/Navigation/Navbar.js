@@ -1,12 +1,12 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink
+  NavItem
 } from "reactstrap";
 
 const Navigation = props => {
@@ -24,33 +24,33 @@ const Navigation = props => {
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
             <NavItem>
-              <NavLink style={{ color: "#ffffff" }} href="/components/">
+              <Link to='/' style={{ color: "#ffffff" }}>
                 Home
-              </NavLink>
+              </Link>
             </NavItem>
             <NavItem>
-              <NavLink
+              <Link
+                to='/bucket-lists'
                 style={{ color: "#ffffff" }}
-                href="https://github.com/reactstrap/reactstrap"
               >
-                BucketList
-              </NavLink>
+                Bucket List's
+              </Link>
             </NavItem>
             <NavItem>
-              <NavLink
+              <Link
                 style={{ color: "#ffffff" }}
-                href="https://github.com/reactstrap/reactstrap"
+                to='/signin'
               >
                 Sign In
-              </NavLink>
+              </Link>
             </NavItem>
             <NavItem>
-              <NavLink
+              <Link
                 style={{ color: "#ffffff" }}
-                href="https://github.com/reactstrap/reactstrap"
+                to='/signup'
               >
                 Sign Up
-              </NavLink>
+              </Link>
             </NavItem>
           </Nav>
         </Collapse>

@@ -1,24 +1,38 @@
-import React from "react";
-import "./App.css";
-import Signin from "./components/Signin";
-import Navbar from "./components/Navigation/Navbar";
-import Signup from "./components/Signup";
-import BucketCounter from "./components/BucketCounter";
+import React from 'react';
+import { connect } from 'react-redux';
+import ProtectedRoute from './components/ProtectedRoute';
+import BucketLists from './components/BucketLists';
+import Navbar from './components/Navigation/Navbar';
+import Signin from './components/Signin';
+import { Route } from 'react-router-dom';
+import './App.css';
 
-
-
-function App() {
+function App(props) {
   return (
-    <div>
+    <div className='App'>
       <Navbar />
-      <BucketCounter />
-      {/* <HomeNav /> */}
-      {/* <Navigation /> */}
-      <Signin />
-      <SignUp />
+      <Route exact path='/signin' component={Signin} />
+      {/* This Route will point to the marketing page later. */}
+      {/* <Route exact path='/' component={HomePage} /> */}
 
+      {/* To add user authentication, change Route to ProtectedRoute below this 
+      line. Currently using a normal Route for testing purposes.*/}
+      <Route exact path='/bucket-lists' component={BucketLists} />
     </div>
-  );
+  )
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    ...state,
+    bucketLists: [
+      ...state.bucketLists
+    ]
+  }
+}
+
+const mapDispatchToProps = {
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
