@@ -3,7 +3,7 @@ const initialState = {
         {
             listName: 'My BucketList',
             id: 0,
-            listItems: ['Do homework', 'Code Facebook'],
+            listItems: ['Graduate Lambda', 'Code Facebook'],
             created_by: 'Cole',
             private: false,
             shared_with: []
@@ -11,7 +11,7 @@ const initialState = {
         {
             listName: 'Another BucketList',
             id: 1,
-            listItems: ['Wash car', 'Take out trash'],
+            listItems: ['Go skydiving', 'Buy a jet'],
             created_by: 'Greg',
             private: false,
             shared_with: []
