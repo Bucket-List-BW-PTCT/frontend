@@ -21,12 +21,6 @@ const FormDiv = styled.div`
   margin: 5px auto;
 `;
 
-const ParaStyle = styled.p`
-  text-align: center;
-  color: grey;
-  font-size: 1.2rem;
-`;
-
 const HeaderStyle = styled.h2`
   color: grey;
 `;
@@ -36,7 +30,7 @@ function SignUp() {
   return (
     <div>
       <DivStyle>
-        <HeaderStyle>Sign In</HeaderStyle>
+        <HeaderStyle>Sign Up</HeaderStyle>
         <Form>
           <FormDiv>
             <Field
@@ -65,12 +59,11 @@ function SignUp() {
               name="password"
               placeholder="Password"
             />
-            <Button color="success">Sign In</Button>
+            <Button color="success">Sign Up</Button>
           </FormDiv>
     
         </Form>
       </DivStyle>
-      <ParaStyle>BUCKETLIST - 2019</ParaStyle>
     </div>
   );
 }
@@ -94,7 +87,7 @@ const FormikSignUpForm = withFormik({
   }),
   handleSubmit(values, { setStatus, resetForm }) {
     axios
-      .post("https://wunderlist-2.herokuapp.com/api/auth/register", values)
+      .post("https://bw-bucketlist.herokuapp.com/api/users/register", values)
       .then(res => {
         setStatus(res.data);
         resetForm();

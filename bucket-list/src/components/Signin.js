@@ -21,12 +21,6 @@ const FormDiv = styled.div`
   margin: 5px auto;
 `;
 
-const ParaStyle = styled.p`
-  text-align: center;
-  color: grey;
-  font-size: 1.2rem;
-`;
-
 const HeaderStyle = styled.h2`
   color: grey;
 `;
@@ -52,12 +46,11 @@ function SignIn(touched, errors) {
               name="password"
               placeholder="Password"
             />
-            <Button type='submit' color="success">Sign In</Button>
+            <Button color="success">Sign In</Button>
 
           </FormDiv>
         </Form>
       </DivStyle>
-      <ParaStyle>BUCKETLIST - 2019</ParaStyle>
     </div>
   );
 }
@@ -81,9 +74,9 @@ const SignInFormikForm = withFormik({
   }),
   handleSubmit(values, { setStatus, resetForm }) {
     axios
-      .post("https://wunderlist-2.herokuapp.com/api/auth/register", values)
+      .post("https://bw-bucketlist.herokuapp.com/api/users/login", values)
       .then(res => {
-        console.log(res);
+        console.log('SENT');
         resetForm();
       });
   }
