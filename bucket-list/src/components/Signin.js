@@ -150,12 +150,15 @@ const formikFormSignIn = withFormik({
   }),
   handleSubmit(values, { setStatus, resetForm }) {
     axios
-      .post("https://bw-bucketlist.herokuapp.com/api", values)
+      .post("https://bw-bucketlist.herokuapp.com/api/users/login/", values)
       .then(res => {
         setStatus(res.data);
         resetForm();
+        
       })
+    
       .catch(err => console.error(err));
+      console.log(values)
   }
 })(Login);
 
