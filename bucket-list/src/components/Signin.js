@@ -31,36 +31,6 @@ const HeaderStyle = styled.h2`
   color: grey;
 `;
 
-// function SignIn(touched, errors) {
-//   return (
-//     <div>
-//       <DivStyle>
-//         <HeaderStyle>Sign In</HeaderStyle>
-//         <Form>
-//           <FormDiv>
-//             {touched.username && errors.username && <p>{errors.username}</p>}
-//             <Field
-//               className="userInfo"
-//               type="text"
-//               name="username"
-//               placeholder="Username or email"
-//             />
-//             {touched.password && errors.password && <p>{errors.password}</p>}
-//             <Field
-//               className="userInfo"
-//               type="password"
-//               name="password"
-//               placeholder="Password"
-//             />
-//             <Button type='submit' color="success">Sign In</Button>
-
-//           </FormDiv>
-//         </Form>
-//       </DivStyle>
-//       <ParaStyle>BUCKETLIST - 2019</ParaStyle>
-//     </div>
-//   );
-// }
 const Login = ({
   touched,
   errors,
@@ -110,33 +80,6 @@ const Login = ({
 };
 
 
-// const SignInFormikForm = withFormik({
-//   mapPropsToValues({ firstName, lastName, username, password }) {
-//     return {
-//       firstName: firstName || "",
-//       lastName: lastName || "",
-//       username: username || "",
-//       password: password || ""
-//     };
-//   },
-
-
-//   validationSchema: Yup.object().shape({
-//     firstName: Yup.string().required("Please enter your first name"),
-//     lastName: Yup.string().required("Please enter your last name"),
-//     username: Yup.string().required("Please enter a username"),
-//     password: Yup.string().required("Please enter a password")
-//   }),
-//   handleSubmit(values, { setStatus, resetForm }) {
-//     axios
-//       .post("https://wunderlist-2.herokuapp.com/api/auth/register", values)
-//       .then(res => {
-//         console.log(res);
-//         resetForm();
-//       });
-//   }
-// })(SignIn);
-
 const formikFormSignIn = withFormik({
   mapPropsToValues({ username, password }) {
     return {
@@ -152,7 +95,9 @@ const formikFormSignIn = withFormik({
     axios
       .post("https://bw-bucketlist.herokuapp.com/api/users/login/", values)
       .then(res => {
-        setStatus(res.data);
+        console.log(res);
+        localStorage.setItem("token", res.data.payload);
+        setStatus(res.data.payload);
         resetForm();
         
       })
