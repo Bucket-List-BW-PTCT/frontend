@@ -4,6 +4,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import BucketLists from './components/BucketLists';
 import Navbar from './components/Navigation/Navbar';
 import Signin from './components/Signin';
+import Signup from './components/Signup';
 import { Route } from 'react-router-dom';
 import './App.css';
 
@@ -18,6 +19,7 @@ function App(props) {
       {/* To add user authentication, change Route to ProtectedRoute below this 
       line. Currently using a normal Route for testing purposes.*/}
       <Route exact path='/bucket-lists' component={BucketLists} />
+      <Signup />
       <Signin />
     </div>
   )
