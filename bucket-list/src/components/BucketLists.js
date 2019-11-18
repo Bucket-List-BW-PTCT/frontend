@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 function BucketLists(props) {
     return (
-        <div className='App'>
+        <div className='bucket-list-page'>
             <h1>Bucket Lists</h1>
 
             <div className='list-wrapper'>
