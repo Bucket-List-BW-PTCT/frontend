@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { withFormik, Form, Field } from "formik";
 import styled from "styled-components";
 import * as Yup from "yup";
@@ -21,79 +21,92 @@ const FormDiv = styled.div`
   margin: 5px auto;
 `;
 
+const ParaStyle = styled.p`
+  text-align: center;
+  color: grey;
+  font-size: 1.2rem;
+`;
+
 const HeaderStyle = styled.h2`
   color: grey;
 `;
 
+const Login = ({
+  touched,
+  errors,
+  status,
+  setToken,
+  setWelcomeMessage,
+  setUserID
+}) => {
+  useEffect(() => {
+    if (status) {
+      setToken(status.token);
+      setWelcomeMessage(status.message);
+      setUserID(status.userID);
+    }
+  }, [status]);
 
-function SignUp() {
   return (
-    <div>
+    <div textAlign="center" >
       <DivStyle>
-        <HeaderStyle>Sign Up</HeaderStyle>
+      <HeaderStyle>Register</HeaderStyle>
         <Form>
           <FormDiv>
-            <Field
-              className="userInfo"
-              type="text"
-              name="firstName"
-              placeholder="First Name"
-            />
+            <div className="ui fluid input">
+              <Field type="username" name="username" placeholder="Username" />
+            </div>
+            {touched.username && errors.username && (
+              <p className="error">{errors.username}</p>
+            )}
 
-            <Field
-              className="userInfo"
-              type="text"
-              name="lastName"
-              placeholder="Last Name"
-            />
+            <div className="ui fluid input">
+              <Field type="password" name="password" placeholder="Password" />
+            </div>
+            {touched.password && errors.password && (
+              <p className="error">{errors.password}</p>
+            )}
 
-            <Field
-              className="userInfo"
-              type="text"
-              name="username"
-              placeholder="Username or email"
-            />
-            <Field
-              className="userInfo"
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
-            <Button color="success">Sign Up</Button>
-          </FormDiv>
-    
+            <Button type="submit" fluid>
+              Login
+            </Button>
+            </FormDiv>
         </Form>
-      </DivStyle>
+
+        </DivStyle>
+        <ParaStyle>BUCKETLIST - 2019</ParaStyle>
     </div>
   );
-}
+};
 
 
-const FormikSignUpForm = withFormik({
-  mapPropsToValues({ firstName, lastName, username, password }) {
+const formikFormSignIn = withFormik({
+  mapPropsToValues({ username, password }) {
     return {
-      firstName: firstName || "",
-      lastName: lastName || "",
       username: username || "",
       password: password || ""
     };
   },
-
   validationSchema: Yup.object().shape({
-    firstName: Yup.string().required("Please enter your first name"),
-    lastName: Yup.string().required("Please enter your last name"),
-    username: Yup.string().required("Please enter a username"),
-    password: Yup.string().required("Please enter a password")
+    username: Yup.string().required("Enter your username"),
+    password: Yup.string().required("Enter your password")
   }),
   handleSubmit(values, { setStatus, resetForm }) {
     axios
-      .post("https://bw-bucketlist.herokuapp.com/api/users/register", values)
+      .post("https://bw-bucketlist.herokuapp.com/api/users/register/", values)
       .then(res => {
-        setStatus(res.data);
+        console.log(res);
+        localStorage.setItem("token", res.data.payload);
+        setStatus(res.data.payload);
         resetForm();
-      });
+        
+      })
+    
+      .catch(err => console.error(err));
+      console.log(values)
   }
-})(SignUp);
+})(Login);
 
-export default FormikSignUpForm;
 
+
+export default formikFormSignIn;

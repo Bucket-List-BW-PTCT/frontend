@@ -24,6 +24,8 @@ function App(props) {
       {/* To add user authentication, change Route to ProtectedRoute below this 
       line. Currently using a normal Route for testing purposes.*/}
       <Route exact path='/bucket-lists' component={BucketLists} />
+      <Signup />
+      <Signin />
       <Footer />
     </div>
   )
