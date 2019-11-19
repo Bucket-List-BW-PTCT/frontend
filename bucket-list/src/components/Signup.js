@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-import { withFormik, Form, Field } from "formik";
-import styled from "styled-components";
-import * as Yup from "yup";
-import axios from "axios";
-import { Button } from "reactstrap";
+import React from 'react';
+import axiosWithAuth from '../utils/axiosWithAuth';
+import styled from 'styled-components';
+import { Button } from 'reactstrap';
 
 const DivStyle = styled.div`
   margin: 10px auto;
@@ -31,82 +29,64 @@ const HeaderStyle = styled.h2`
   color: grey;
 `;
 
-const Login = ({
-  touched,
-  errors,
-  status,
-  setToken,
-  setWelcomeMessage,
-  setUserID
-}) => {
-  useEffect(() => {
-    if (status) {
-      setToken(status.token);
-      setWelcomeMessage(status.message);
-      setUserID(status.userID);
-    }
-  }, [status]);
-
-  return (
-    <div textAlign="center" >
-      <DivStyle>
-      <HeaderStyle>Register</HeaderStyle>
-        <Form>
-          <FormDiv>
-            <div className="ui fluid input">
-              <Field type="username" name="username" placeholder="Username" />
-            </div>
-            {touched.username && errors.username && (
-              <p className="error">{errors.username}</p>
-            )}
-
-            <div className="ui fluid input">
-              <Field type="password" name="password" placeholder="Password" />
-            </div>
-            {touched.password && errors.password && (
-              <p className="error">{errors.password}</p>
-            )}
-
-            <Button type="submit" fluid>
-              Login
-            </Button>
-            </FormDiv>
-        </Form>
-
-        </DivStyle>
-        <ParaStyle>BUCKETLIST - 2019</ParaStyle>
-    </div>
-  );
-};
-
-
-const formikFormSignIn = withFormik({
-  mapPropsToValues({ username, password }) {
-    return {
-      username: username || "",
-      password: password || ""
-    };
-  },
-  validationSchema: Yup.object().shape({
-    username: Yup.string().required("Enter your username"),
-    password: Yup.string().required("Enter your password")
-  }),
-  handleSubmit(values, { setStatus, resetForm }) {
-    axios
-      .post("https://bw-bucketlist.herokuapp.com/api/users/register/", values)
+function Login(props) {
+  const [form, setForm] = React.useState({
+    username: '',
+    password: ''
+  });
+  const login = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post('https://bw-bucketlist.herokuapp.com/api/users/register', form)
       .then(res => {
         console.log(res);
-        localStorage.setItem("token", res.data.payload);
-        setStatus(res.data.payload);
-        resetForm();
-        
+        localStorage.setItem('token', res.data.payload);
       })
-    
-      .catch(err => console.error(err));
-      console.log(values)
-  }
-})(Login);
+      .catch(err => {
+        console.log(err.response);
+        setForm({
+          username: '',
+          password: ''
+        });
+      });
+  };
+  const handleChanges = e => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
+  return (
+    <div textAlign='center'>
+      <DivStyle>
+        <FormDiv>
+          <HeaderStyle>Sign Up</HeaderStyle>
 
+          <form onSubmit={login}>
+            <div className='ui fluid input'>
+              <input
+                name='username'
+                type='text'
+                value={form.username}
+                onChange={handleChanges}
+                placeholder='UserName'
+              />
+            </div>
+            <div className='ui fluid input'>
+              <input
+                name='password'
+                type='text'
+                value={form.password}
+                onChange={handleChanges}
+                placeholder='Password'
+              />
+            </div>
+            <Button type='submit' fluid>
+              Login
+            </Button>
+          </form>
+        </FormDiv>
+      </DivStyle>
+    </div>
+  );
+}
 
-export default formikFormSignIn;
+export default Login;

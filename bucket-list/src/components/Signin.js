@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-import { withFormik, Form, Field } from "formik";
-import styled from "styled-components";
-import * as Yup from "yup";
-import axios from "axios";
-import { Button } from "reactstrap";
+import React from 'react';
+import axiosWithAuth from '../utils/axiosWithAuth';
+import styled from 'styled-components';
+import { Button } from 'reactstrap';
 
 const DivStyle = styled.div`
   margin: 10px auto;
@@ -31,83 +29,65 @@ const HeaderStyle = styled.h2`
   color: grey;
 `;
 
-const Login = ({
-  touched,
-  errors,
-  status,
-  setToken,
-  setWelcomeMessage,
-  setUserID
-}) => {
-  useEffect(() => {
-    if (status) {
-      setToken(status.token);
-      setWelcomeMessage(status.message);
-      setUserID(status.userID);
-    }
-  }, [status]);
+function Login(props) {
+  const [form, setForm] = React.useState({  //sets state of the form to empty fields
+    username: '',   //user name is empty
+    password: ''  //password is empty
+  });
+  const login = e => {
+    e.preventDefault();  //method stops the default action of an element from happening. For example: Prevent a submit button from submitting a form. 
+    axiosWithAuth() //axioswithauth method that has been imported
+      .post('https://bw-bucketlist.herokuapp.com/api/users/login', form)  //talks to the back-end and calls the url and sends the values of form.
+      .then(res => {
+        console.log(res); //console logs the response
+        localStorage.setItem('token', res.data.payload); //The payload is the body of your post request. The body is the second parameter (user) you are sending in with:
+      })
+      .catch(err => { //catches an error, the block of code below is to be executed if an error occurs.
+        console.log(err.response); //console logs the error response
+        setForm({   //sets state of the form to empty fields after a bad request.
+          username: '', //user name is empty
+          password: '' //password is empty
+        });
+      }); 
+  };
+  const handleChanges = e => { //event object
+    setForm({ ...form, [e.target.name]: e.target.value });  //uses the spread operator to update the keys on our state object. It changes the value of username or pw one key at a time.
+    console.log(form); //console logs each keystore, can be removed.
+  };
 
   return (
-    <div textAlign="center" >
+    <div textAlign='center'>
       <DivStyle>
-      <HeaderStyle>Sign In</HeaderStyle>
-        <Form>
-          <FormDiv>
-            <div className="ui fluid input">
-              <Field type="username" name="username" placeholder="Username" />
-            </div>
-            {touched.username && errors.username && (
-              <p className="error">{errors.username}</p>
-            )}
+        <FormDiv>
+          <HeaderStyle>Log In</HeaderStyle>
 
-            <div className="ui fluid input">
-              <Field type="password" name="password" placeholder="Password" />
+          <form onSubmit={login}>    {/* onsubmit calls the method login  */}
+            <div className='ui fluid input'>
+              <input
+                name='username'
+                type='text'
+                value={form.username}
+                onChange={handleChanges}
+                placeholder='UserName'
+              />
             </div>
-            {touched.password && errors.password && (
-              <p className="error">{errors.password}</p>
-            )}
-
-            <Button type="submit" fluid>
+            <div className='ui fluid input'>
+              <input
+                name='password' //input name
+                type='text' //input type
+                value={form.password} //the value of the input
+                onChange={handleChanges} //anytime the field changes it will call handlechanges which uses a method to input each keystroke
+                placeholder='Password' //input placeholder
+              />
+            </div>
+            <Button type='submit' fluid>
               Login
             </Button>
-            </FormDiv>
-        </Form>
-
-        </DivStyle>
-        <ParaStyle>BUCKETLIST - 2019</ParaStyle>
+          </form>
+        </FormDiv>
+      </DivStyle>
     </div>
   );
-};
+}
 
-
-const formikFormSignIn = withFormik({
-  mapPropsToValues({ username, password }) {
-    return {
-      username: username || "",
-      password: password || ""
-    };
-  },
-  validationSchema: Yup.object().shape({
-    username: Yup.string().required("Enter your username"),
-    password: Yup.string().required("Enter your password")
-  }),
-  handleSubmit(values, { setStatus, resetForm }) {
-    axios
-      .post("https://bw-bucketlist.herokuapp.com/api/users/login/", values)
-      .then(res => {
-        console.log(res);
-        localStorage.setItem("token", res.data.payload);
-        setStatus(res.data.payload);
-        resetForm();
-        
-      })
-    
-      .catch(err => console.error(err));
-      console.log(values)
-  }
-})(Login); 
-// dfsdfdf
-
-
-
-export default formikFormSignIn;
+export default Login;
