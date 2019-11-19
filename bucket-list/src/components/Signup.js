@@ -1,9 +1,6 @@
-import React from "react";
-import { withFormik, Form, Field } from "formik";
+import React, { useState } from "react";
 import styled from "styled-components";
-import * as Yup from "yup";
 import axios from "axios";
-
 const DivStyle = styled.div`
   margin: 10px auto;
   width: 500px;
@@ -30,71 +27,55 @@ const HeaderStyle = styled.h2`
   color: grey;
 `;
 
-function SignUp() {
+export default function SignUp() {
+  const [form, setForm] = useState({
+    username: "",
+    password: ""
+  });
+
+  const handleChanges = e => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (values, { setStatus, resetForm }) => {
+    axios
+      .post("https://bw-bucketlist.herokuapp.com/api/users/register/", values)
+      .then(res => {
+        setStatus(res.data);
+        resetForm();
+      });
+  };
+
   return (
     <div>
       <DivStyle>
-        <HeaderStyle>Sign In</HeaderStyle>
-        <Form>
+        <HeaderStyle>Sign Up</HeaderStyle>
+        <form onSubmit={handleSubmit}>
           <FormDiv>
-            <Field
-              className="userInfo"
-              type="text"
-              name="firstName"
-              placeholder="First Name"
-            />
+            <label>
+              <input
+                type="text"
+                name="username"
+                className="userInfo"
+                placeholder="Username"
+                onChange={handleChanges}
+              />
+            </label>
 
-            <Field
-              className="userInfo"
-              type="text"
-              name="lastName"
-              placeholder="Last Name"
-            />
-
-            <Field
-              className="userInfo"
-              type="text"
-              name="username"
-              placeholder="Username or email"
-            />
-            <Field
+            <input
               className="userInfo"
               type="password"
               name="password"
               placeholder="Password"
+              onChange={handleChanges}
             />
-            <button className="signInButton">Sign In</button>
+            <button type="submit" className="signInButton">
+              Sign In
+            </button>
           </FormDiv>
-        </Form>
+        </form>
       </DivStyle>
       <ParaStyle>BUCKETLIST - 2019</ParaStyle>
     </div>
   );
 }
-
-const FormikSignUpForm = withFormik({
-  mapPropsToValues({ firstName, lastName, username, password }) {
-    return {
-      firstName: firstName || "",
-      lastName: lastName || "",
-      username: username || "",
-      password: password || ""
-    };
-  },
-  validationSchema: Yup.object().shape({
-    firstName: Yup.string().required("Please enter your first name"),
-    lastName: Yup.string().required("Please enter your last name"),
-    username: Yup.string().required("Please enter a username"),
-    password: Yup.string().required("Please enter a password")
-  }),
-  handleSubmit(values, { setStatus, resetForm }) {
-    axios
-      .post("https://wunderlist-2.herokuapp.com/api/auth/register", values)
-      .then(res => {
-        setStatus(res.data);
-        resetForm();
-      });
-  }
-})(SignUp);
-
-export default FormikSignUpForm;
