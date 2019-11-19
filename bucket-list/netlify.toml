@@ -1,0 +1,10 @@
+[build]
+  command = "yarn run build"
+  publish="Bucket-List-BW-PTCT/frontend"
+  base = "Bucket-List-BW-PTCT"
+
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
