@@ -1,4 +1,6 @@
 const initialState = {
+    isLoggedIn: false,
+    userInfo: {},
     bucketLists: [
         {
             listName: 'My BucketList',
@@ -21,6 +23,21 @@ const initialState = {
 
 export function reducer (state = initialState, action) {
     switch(action.type) {
+        case 'SIGNIN':
+            return {
+                ...state,
+                isLoggedIn: true,
+                userInfo: action.payload
+            }
+
+        case 'SIGNOUT':
+            localStorage.removeItem('token');
+            return {
+                ...state,
+                isLoggedIn: false,
+                userInfo: {}
+            }
+
         default:
             return state
     }

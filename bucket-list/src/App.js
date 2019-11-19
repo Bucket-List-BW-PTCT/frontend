@@ -18,14 +18,12 @@ function App(props) {
       <Navbar />
       <Route exact path='/signin' component={Signin} />
       <Route exact path='/signup' component={Signup} />
-      {/* This Route will point to the marketing page later.  */}
       <Route exact path='/' render={() => <HomePage loggedIn={loggedIn} />} />
+      {/* <Route exact path='/user/:id' render={() => <UserPage userInfo={props.userInfo} />} /> */}
 
       {/* To add user authentication, change Route to ProtectedRoute below this 
       line. Currently using a normal Route for testing purposes.*/}
       <Route exact path='/bucket-lists' component={BucketLists} />
-      <Signup />
-      <Signin />
       <Footer />
     </div>
   )
@@ -34,6 +32,7 @@ function App(props) {
 function mapStateToProps(state) {
   return {
     ...state,
+    userInfo: {...state.userInfo},
     bucketLists: [
       ...state.bucketLists
     ]

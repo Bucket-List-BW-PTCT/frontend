@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { withFormik, Form, Field } from "formik";
+import { signin } from '../actions/signin';
+import { connect } from 'react-redux';
 import styled from "styled-components";
 import * as Yup from "yup";
 import axios from "axios";
@@ -19,12 +21,6 @@ const FormDiv = styled.div`
   flex-direction: column;
   width: 450px;
   margin: 5px auto;
-`;
-
-const ParaStyle = styled.p`
-  text-align: center;
-  color: grey;
-  font-size: 1.2rem;
 `;
 
 const HeaderStyle = styled.h2`
@@ -50,7 +46,7 @@ const Login = ({
   return (
     <div textAlign="center" >
       <DivStyle>
-      <HeaderStyle>Register</HeaderStyle>
+      <HeaderStyle>Sign Up</HeaderStyle>
         <Form>
           <FormDiv>
             <div className="ui fluid input">
@@ -68,19 +64,18 @@ const Login = ({
             )}
 
             <Button type="submit" fluid>
-              Login
+              Register
             </Button>
             </FormDiv>
         </Form>
 
         </DivStyle>
-        <ParaStyle>BUCKETLIST - 2019</ParaStyle>
     </div>
   );
 };
 
 
-const formikFormSignIn = withFormik({
+const formikFormSignUp = withFormik({
   mapPropsToValues({ username, password }) {
     return {
       username: username || "",
@@ -99,7 +94,7 @@ const formikFormSignIn = withFormik({
         localStorage.setItem("token", res.data.payload);
         setStatus(res.data.payload);
         resetForm();
-        
+        props.signin();
       })
     
       .catch(err => console.error(err));
@@ -107,6 +102,15 @@ const formikFormSignIn = withFormik({
   }
 })(Login);
 
+function mapStateToProps(state) {
+  return {
+    ...state,
+    isLoggedIn: state.isLoggedIn
+  }
+}
 
+const mapDispatchToProps = {
+  
+}
 
-export default formikFormSignIn;
+export default connect(mapStateToProps)(formikFormSignUp);

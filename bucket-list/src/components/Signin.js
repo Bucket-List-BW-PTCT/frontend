@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { withFormik, Form, Field } from "formik";
 import styled from "styled-components";
+import { connect } from 'react-redux';
 import * as Yup from "yup";
 import axios from "axios";
 import { Button } from "reactstrap";
+import { signin } from '../actions/signin';
 
 const DivStyle = styled.div`
   margin: 10px auto;
@@ -21,24 +23,20 @@ const FormDiv = styled.div`
   margin: 5px auto;
 `;
 
-const ParaStyle = styled.p`
-  text-align: center;
-  color: grey;
-  font-size: 1.2rem;
-`;
-
 const HeaderStyle = styled.h2`
   color: grey;
 `;
 
-const Login = ({
+const Login = (values, {
   touched,
   errors,
   status,
   setToken,
   setWelcomeMessage,
-  setUserID
+  setUserID,
+  props
 }) => {
+
   useEffect(() => {
     if (status) {
       setToken(status.token);
@@ -74,7 +72,6 @@ const Login = ({
         </Form>
 
         </DivStyle>
-        <ParaStyle>BUCKETLIST - 2019</ParaStyle>
     </div>
   );
 };
@@ -91,7 +88,7 @@ const formikFormSignIn = withFormik({
     username: Yup.string().required("Enter your username"),
     password: Yup.string().required("Enter your password")
   }),
-  handleSubmit(values, { setStatus, resetForm }) {
+  handleSubmit(values, { setStatus, resetForm, props }) {
     axios
       .post("https://bw-bucketlist.herokuapp.com/api/users/login/", values)
       .then(res => {
@@ -99,7 +96,7 @@ const formikFormSignIn = withFormik({
         localStorage.setItem("token", res.data.payload);
         setStatus(res.data.payload);
         resetForm();
-        
+        props.signin();
       })
     
       .catch(err => console.error(err));
@@ -107,6 +104,15 @@ const formikFormSignIn = withFormik({
   }
 })(Login);
 
+function mapStateToProps(state) {
+  return {
+    ...state,
+    isLoggedIn: state.isLoggedIn
+  }
+}
 
+const mapDispatchToProps = {
+  signin
+}
 
-export default formikFormSignIn;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
