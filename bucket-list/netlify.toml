@@ -1,7 +1,7 @@
 [build]
   command = "yarn run build"
-  publish="Bucket-List-BW-PTCT/frontend"
-  base = "Bucket-List-BW-PTCT"
+  publish = "build"
+  # functions = "functions"
 
 
 [[redirects]]
