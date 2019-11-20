@@ -31,7 +31,6 @@ export function reducer (state = initialState, action) {
             }
 
         case 'SIGNOUT':
-            localStorage.removeItem('token');
             return {
                 ...state,
                 isLoggedIn: false,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Signin from '../components/Signin';
 import Signup from '../components/Signup';
@@ -6,7 +6,7 @@ import Signup from '../components/Signup';
 function HomePage(props) {
     return (
         <div>
-            {props.loggedIn ? (
+            {props.isLoggedIn ? (
                 // <Home />
                 <h1>
                 HOME
