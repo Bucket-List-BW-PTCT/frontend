@@ -17,7 +17,7 @@ const HomeNav = props => {
   return (
     <div>
       <Navbar color="success" light>
-        <NavbarBrand style={{ color: "#00000" }} href="/" className="mr-auto">
+        <NavbarBrand href="/" className="mr-auto">
           BucketList
         </NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
