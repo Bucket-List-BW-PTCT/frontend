@@ -72,6 +72,7 @@ function Login(props) {
                 placeholder="UserName"
               />
             </div>
+
             <div className="ui fluid input">
               <input
                 name="password" //input name
@@ -81,6 +82,7 @@ function Login(props) {
                 placeholder="Password" //input placeholder
               />
             </div>
+            
             <Button style={buttonStyle} type="submit" fluid>
               Login
             </Button>
