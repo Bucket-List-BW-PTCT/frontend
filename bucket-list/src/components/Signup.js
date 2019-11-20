@@ -72,7 +72,6 @@ function Registration(props) {
       </DivStyle>
     </div>
   );
-
 }
 
 function mapStateToProps(state) {
