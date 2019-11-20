@@ -1,11 +1,8 @@
-import React, { useEffect } from "react";
-import { withFormik, Form, Field } from "formik";
-import styled from "styled-components";
+import React from 'react';
 import { connect } from 'react-redux';
-import * as Yup from "yup";
-import axios from "axios";
-import { Button } from "reactstrap";
-import { signin } from '../actions/signin';
+import { signin } from '../actions/auth';
+import styled from 'styled-components';
+import { Button } from 'reactstrap';
 
 const DivStyle = styled.div`
   margin: 10px auto;
@@ -27,92 +24,69 @@ const HeaderStyle = styled.h2`
   color: grey;
 `;
 
-const Login = (values, {
-  touched,
-  errors,
-  status,
-  setToken,
-  setWelcomeMessage,
-  setUserID,
-  props
-}) => {
+function Login(props) {
+  const [form, setForm] = React.useState({  //sets state of the form to empty fields
+    username: '',   //user name is empty
+    password: ''  //password is empty
+  });
 
-  useEffect(() => {
-    if (status) {
-      setToken(status.token);
-      setWelcomeMessage(status.message);
-      setUserID(status.userID);
-    }
-  }, [status]);
+  const login = e => {
+    e.preventDefault();  //method stops the default action of an element from happening. For example: Prevent a submit button from submitting a form. 
+    props.signin(form)
+    console.log(props.userInfo)
+    setForm({
+      username: '',
+      password: ''
+    })
+  };
+
+  const handleChanges = e => { //event object
+    setForm({ ...form, [e.target.name]: e.target.value });  //uses the spread operator to update the keys on our state object. It changes the value of username or pw one key at a time.
+  };
 
   return (
-    <div textAlign="center" >
+    <div textAlign='center'>
       <DivStyle>
-      <HeaderStyle>Sign In</HeaderStyle>
-        <Form>
-          <FormDiv>
-            <div className="ui fluid input">
-              <Field type="username" name="username" placeholder="Username" />
-            </div>
-            {touched.username && errors.username && (
-              <p className="error">{errors.username}</p>
-            )}
+        <FormDiv>
+          <HeaderStyle>Log In</HeaderStyle>
 
-            <div className="ui fluid input">
-              <Field type="password" name="password" placeholder="Password" />
+          <form onSubmit={login}>    {/* onsubmit calls the method login  */}
+            <div className='ui fluid input'>
+              <input
+                name='username'
+                type='text'
+                value={form.username}
+                onChange={handleChanges}
+                placeholder='UserName'
+              />
             </div>
-            {touched.password && errors.password && (
-              <p className="error">{errors.password}</p>
-            )}
-
-            <Button type="submit" fluid>
+            <div className='ui fluid input'>
+              <input
+                name='password' //input name
+                type='text' //input type
+                value={form.password} //the value of the input
+                onChange={handleChanges} //anytime the field changes it will call handlechanges which uses a method to input each keystroke
+                placeholder='Password' //input placeholder
+              />
+            </div>
+            <Button type='submit' fluid>
               Login
             </Button>
-            </FormDiv>
-        </Form>
-
-        </DivStyle>
+          </form>
+        </FormDiv>
+      </DivStyle>
     </div>
   );
-};
-
-
-const formikFormSignIn = withFormik({
-  mapPropsToValues({ username, password }) {
-    return {
-      username: username || "",
-      password: password || ""
-    };
-  },
-  validationSchema: Yup.object().shape({
-    username: Yup.string().required("Enter your username"),
-    password: Yup.string().required("Enter your password")
-  }),
-  handleSubmit(values, { setStatus, resetForm, props }) {
-    axios
-      .post("https://bw-bucketlist.herokuapp.com/api/users/login/", values)
-      .then(res => {
-        console.log(res);
-        localStorage.setItem("token", res.data.payload);
-        setStatus(res.data.payload);
-        resetForm();
-        props.signin();
-      })
-    
-      .catch(err => console.error(err));
-      console.log(values)
-  }
-})(Login); 
-// dfsdfdf
+}
 
 function mapStateToProps(state) {
   return {
     ...state,
-    isLoggedIn: state.isLoggedIn
+    userInfo: {...state.userInfo}
   }
 }
 
-const mapDispatchToProps = {
+const mapDispatchToProps= {
   signin
 }
 

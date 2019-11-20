@@ -1,11 +1,8 @@
-import React, { useEffect } from "react";
-import { withFormik, Form, Field } from "formik";
-import { signin } from '../actions/signin';
+import React from 'react';
+import { signup } from '../actions/auth';
 import { connect } from 'react-redux';
-import styled from "styled-components";
-import * as Yup from "yup";
-import axios from "axios";
-import { Button } from "reactstrap";
+import styled from 'styled-components';
+import { Button } from 'reactstrap';
 
 const DivStyle = styled.div`
   margin: 10px auto;
@@ -27,90 +24,78 @@ const HeaderStyle = styled.h2`
   color: grey;
 `;
 
-const Login = ({
-  touched,
-  errors,
-  status,
-  setToken,
-  setWelcomeMessage,
-  setUserID
-}) => {
-  useEffect(() => {
-    if (status) {
-      setToken(status.token);
-      setWelcomeMessage(status.message);
-      setUserID(status.userID);
-    }
-  }, [status]);
+function Signup(props) {
+  const [form, setForm] = React.useState({
+    username: '',
+    email: '',
+    password: ''
+  });
+  const signup = e => {
+    e.preventDefault();
+    props.signup(form);
+    setForm({
+      username: '',
+      email: '',
+      password: ''
+    })
+  }
+
+  const handleChanges = e => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   return (
-    <div textAlign="center" >
+    <div textAlign='center'>
       <DivStyle>
-      <HeaderStyle>Sign Up</HeaderStyle>
-        <Form>
-          <FormDiv>
-            <div className="ui fluid input">
-              <Field type="username" name="username" placeholder="Username" />
-            </div>
-            {touched.username && errors.username && (
-              <p className="error">{errors.username}</p>
-            )}
+        <FormDiv>
+          <HeaderStyle>Sign Up</HeaderStyle>
 
-            <div className="ui fluid input">
-              <Field type="password" name="password" placeholder="Password" />
+          <form onSubmit={signup}>
+            <div className='ui fluid input'>
+              <input
+                name='username'
+                type='text'
+                value={form.username}
+                onChange={handleChanges}
+                placeholder='UserName'
+              />
             </div>
-            {touched.password && errors.password && (
-              <p className="error">{errors.password}</p>
-            )}
-
-            <Button type="submit" fluid>
-              Register
+            <div className='ui fluid input'>
+              <input
+                name='email'
+                type='text'
+                value={form.email}
+                onChange={handleChanges}
+                placeholder='Email'
+              />
+            </div>
+            <div className='ui fluid input'>
+              <input
+                name='password'
+                type='text'
+                value={form.password}
+                onChange={handleChanges}
+                placeholder='Password'
+              />
+            </div>
+            <Button type='submit' fluid>
+              Login
             </Button>
-            </FormDiv>
-        </Form>
-
-        </DivStyle>
+          </form>
+        </FormDiv>
+      </DivStyle>
     </div>
   );
-};
-
-
-const formikFormSignUp = withFormik({
-  mapPropsToValues({ username, password }) {
-    return {
-      username: username || "",
-      password: password || ""
-    };
-  },
-  validationSchema: Yup.object().shape({
-    username: Yup.string().required("Enter your username"),
-    password: Yup.string().required("Enter your password")
-  }),
-  handleSubmit(values, { setStatus, resetForm }) {
-    axios
-      .post("https://bw-bucketlist.herokuapp.com/api/users/register/", values)
-      .then(res => {
-        console.log(res);
-        localStorage.setItem("token", res.data.payload);
-        setStatus(res.data.payload);
-        resetForm();
-        props.signin();
-      })
-    
-      .catch(err => console.error(err));
-      console.log(values)
-  }
-})(Login);
+}
 
 function mapStateToProps(state) {
   return {
-    ...state,
-    isLoggedIn: state.isLoggedIn
+    ...state
   }
 }
 
-const mapDispatchToProps = {
-  
+const mapDispatchToProps= {
+  signup
 }
 
-export default connect(mapStateToProps)(formikFormSignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
