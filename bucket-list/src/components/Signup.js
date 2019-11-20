@@ -1,5 +1,5 @@
 import React from 'react';
-import { signup, signin } from '../actions/auth';
+import { signup, signin, getUser } from '../actions/auth';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Button } from 'reactstrap';
@@ -43,6 +43,7 @@ function Registration(props) {
     e.preventDefault();
     props.signup(form);
     props.signin(form);
+    props.getUser(props.userInfo.id)
   };
 
   const handleChanges = e => {
@@ -91,7 +92,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   signup,
-  signin
+  signin,
+  getUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Registration);

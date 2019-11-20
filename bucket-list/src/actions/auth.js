@@ -4,6 +4,19 @@ import { Redirect } from 'react-router-dom';
 export const SIGNIN = 'SIGNIN';
 export const SIGNUP = 'SIGNUP';
 export const SIGNOUT = 'SIGNOUT';
+export const GET_USER = 'GET_USER';
+
+export function getUser(user_id) {
+    return function(dispatch) {
+        return axiosWithAuth()
+        .get(`{https://bw-bucketlist.herokuapp.com/api/users/${user_id}}`)
+        .then((res) => {
+            console.log('Getting user...');
+            console.log(res);
+            dispatch({ type: GET_USER })
+        })
+    }
+}
 
 export function signin(userData) {
     return dispatch => {
@@ -28,7 +41,7 @@ export function signup(userData) {
         .then(res => {
             console.log(res);
             localStorage.setItem('token', res.data.token);
-            dispatch({ type: SIGNUP})
+            dispatch({ type: SIGNUP, payload: userData })
         })
         .catch(err => {
             console.log(err.response);
