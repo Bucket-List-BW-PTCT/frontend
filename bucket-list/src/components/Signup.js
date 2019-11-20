@@ -29,38 +29,37 @@ const HeaderStyle = styled.h2`
   color: grey;
 `;
 
-function Login(props) {
+function Registration(props) {
   const [form, setForm] = React.useState({
-    username: '',
-    password: ''
+    username: "",
+    password: ""
   });
-  const login = e => {
+  const registration = e => {
     e.preventDefault();
     axiosWithAuth()
-      .post('https://bw-bucketlist.herokuapp.com/api/users/register', form)
+      .post("https://bw-bucketlist.herokuapp.com/api/users/register", form)
       .then(res => {
         console.log(res);
-        localStorage.setItem('token', res.data.payload);
+        // localStorage.setItem("token", res.data.payload);
       })
       .catch(err => {
         console.log(err.response);
         setForm({
-          username: '',
-          password: ''
+          username: "",
+          password: ""
         });
       });
   };
   const handleChanges = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
   return (
     <div textAlign='center'>
       <DivStyle>
         <FormDiv>
           <HeaderStyle>Sign Up</HeaderStyle>
 
-          <form onSubmit={login}>
+          <form onSubmit={registration}>
             <div className='ui fluid input'>
               <input
                 name='username'
@@ -87,6 +86,7 @@ function Login(props) {
       </DivStyle>
     </div>
   );
+
 }
 
-export default Login;
+export default Registration;
