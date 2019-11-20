@@ -7,6 +7,7 @@ import Navbar from './components/Navigation/Navbar';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 import BucketCard from './components/Buckets/BucketCard'
+import BucketAdd from './components/Buckets/BucketAdd'
 import Footer from './components/Footer';
 import { Route } from 'react-router-dom';
 import './App.css';
@@ -19,6 +20,7 @@ function App(props) {
       <Route exact path='/signup' component={Signup} />
       <Route exact path='/' component={HomePage} />
       <BucketCard />
+      <BucketAdd />
       {/* <Route exact path='/user/:id' render={() => <UserPage userInfo={props.userInfo} />} /> */}
 
       {/* To add user authentication, change Route to ProtectedRoute below this 
