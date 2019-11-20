@@ -30,7 +30,8 @@ function Signup(props) {
     email: '',
     password: ''
   });
-  const signup = e => {
+
+  const register = e => {
     e.preventDefault();
     props.signup(form);
     setForm({
@@ -50,7 +51,7 @@ function Signup(props) {
         <FormDiv>
           <HeaderStyle>Sign Up</HeaderStyle>
 
-          <form onSubmit={signup}>
+          <form onSubmit={register}>
             <div className='ui fluid input'>
               <input
                 name='username'
