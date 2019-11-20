@@ -36,6 +36,23 @@ export function signup(userData) {
     };
 }
 
+export function addBucket(userData) {
+    return dispatch => {
+        axiosWithAuth()
+        .post('https://bw-bucketlist.herokuapp.com/api/buckets', userData)
+        .then(res => {
+            console.log(res);
+            localStorage.setItem('token', res.data.token);
+            dispatch({ type: SIGNUP})
+        })
+        .catch(err => {
+            console.log(err.response);
+        });
+    };
+}
+
+
+
 export function signout() {
     return dispatch => {
         localStorage.removeItem('token');
