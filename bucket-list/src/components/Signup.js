@@ -1,11 +1,20 @@
-import React from 'react';
-import axiosWithAuth from '../utils/axiosWithAuth';
-import styled from 'styled-components';
-import { Button } from 'reactstrap';
+import React from "react";
+import axiosWithAuth from "../utils/axiosWithAuth";
+import styled from "styled-components";
+import { Button } from "reactstrap";
+
+const buttonStyle = {
+  color: "white",
+  background: "green",
+  width: "200px",
+  margin: "10px auto",
+  borderRadius: "10px",
+  boxShadow: "4px 4px 7px #888888"
+};
 
 const DivStyle = styled.div`
   margin: 10px auto;
-  width: 500px;
+  width: 450px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -19,14 +28,8 @@ const FormDiv = styled.div`
   margin: 5px auto;
 `;
 
-const ParaStyle = styled.p`
-  text-align: center;
-  color: grey;
-  font-size: 1.2rem;
-`;
-
 const HeaderStyle = styled.h2`
-  color: grey;
+  color: green;
 `;
 
 function Registration(props) {
@@ -54,31 +57,31 @@ function Registration(props) {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
   return (
-    <div textAlign='center'>
+    <div textAlign="center">
       <DivStyle>
         <FormDiv>
           <HeaderStyle>Sign Up</HeaderStyle>
 
           <form onSubmit={registration}>
-            <div className='ui fluid input'>
+            <div className="ui fluid input">
               <input
-                name='username'
-                type='text'
+                name="username"
+                type="text"
                 value={form.username}
                 onChange={handleChanges}
-                placeholder='UserName'
+                placeholder="UserName"
               />
             </div>
-            <div className='ui fluid input'>
+            <div className="ui fluid input">
               <input
-                name='password'
-                type='text'
+                name="password"
+                type="text"
                 value={form.password}
                 onChange={handleChanges}
-                placeholder='Password'
+                placeholder="Password"
               />
             </div>
-            <Button type='submit' fluid>
+            <Button style={buttonStyle} type="submit" fluid>
               Login
             </Button>
           </form>
@@ -86,7 +89,6 @@ function Registration(props) {
       </DivStyle>
     </div>
   );
-
 }
 
 export default Registration;
