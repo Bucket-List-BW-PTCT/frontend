@@ -70,6 +70,7 @@ function Login(props) {
                 value={form.username}
                 onChange={handleChanges}
                 placeholder="UserName"
+                required
               />
             </div>
 
@@ -80,6 +81,7 @@ function Login(props) {
                 value={form.password} //the value of the input
                 onChange={handleChanges} //anytime the field changes it will call handlechanges which uses a method to input each keystroke
                 placeholder="Password" //input placeholder
+                required
               />
             </div>
             

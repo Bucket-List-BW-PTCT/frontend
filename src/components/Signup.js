@@ -63,6 +63,7 @@ function Registration(props) {
                 value={form.username}
                 onChange={handleChanges}
                 placeholder="UserName"
+                required
               />
             </div>
             <div className="ui fluid input">
@@ -72,6 +73,7 @@ function Registration(props) {
                 value={form.password}
                 onChange={handleChanges}
                 placeholder="Password"
+                required
               />
             </div>
             <Button style={buttonStyle} type="submit" fluid>
