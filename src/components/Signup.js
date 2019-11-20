@@ -1,8 +1,8 @@
-import React from 'react';
-import { signup, signin } from '../actions/auth';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { Button } from 'reactstrap';
+import React from "react";
+import { signup, signin, getUser } from "../actions/auth";
+import { connect } from "react-redux";
+import styled from "styled-components";
+import { Button } from "reactstrap";
 
 const buttonStyle = {
   color: "white",
@@ -43,6 +43,7 @@ function Registration(props) {
     e.preventDefault();
     props.signup(form);
     props.signin(form);
+    props.getUser(props.userInfo.id);
   };
 
   const handleChanges = e => {
@@ -62,6 +63,7 @@ function Registration(props) {
                 value={form.username}
                 onChange={handleChanges}
                 placeholder="UserName"
+                required
               />
             </div>
             <div className="ui fluid input">
@@ -71,10 +73,11 @@ function Registration(props) {
                 value={form.password}
                 onChange={handleChanges}
                 placeholder="Password"
+                required
               />
             </div>
             <Button style={buttonStyle} type="submit" fluid>
-              Login
+              Sign Up
             </Button>
           </form>
         </FormDiv>
@@ -86,12 +89,13 @@ function Registration(props) {
 function mapStateToProps(state) {
   return {
     ...state
-  }
+  };
 }
 
 const mapDispatchToProps = {
   signup,
-  signin
-}
+  signin,
+  getUser
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Registration);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { signin } from '../actions/auth';
+import { signin, getUser } from '../actions/auth';
 import styled from 'styled-components';
 import { Button } from 'reactstrap';
 
@@ -43,11 +43,11 @@ function Login(props) {
   const login = e => {
     e.preventDefault();  //method stops the default action of an element from happening. For example: Prevent a submit button from submitting a form. 
     props.signin(form)
-    console.log(props.userInfo)
     setForm({
       username: '',
       password: ''
     })
+    props.getUser(props.userInfo.id)
   };
 
   const handleChanges = e => { //event object
@@ -70,6 +70,7 @@ function Login(props) {
                 value={form.username}
                 onChange={handleChanges}
                 placeholder="UserName"
+                required
               />
             </div>
 
@@ -80,6 +81,7 @@ function Login(props) {
                 value={form.password} //the value of the input
                 onChange={handleChanges} //anytime the field changes it will call handlechanges which uses a method to input each keystroke
                 placeholder="Password" //input placeholder
+                required
               />
             </div>
             
@@ -101,7 +103,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps= {
-  signin
+  signin,
+  getUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

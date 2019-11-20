@@ -27,7 +27,24 @@ export function reducer (state = initialState, action) {
             return {
                 ...state,
                 isLoggedIn: true,
-                userInfo: action.payload
+                userInfo: {
+                    ...action.payload
+                }
+            }
+
+        case 'SIGNUP':
+            return {
+                ...state,
+                isLoggedIn: true,
+                userInfo: {
+                    username: action.payload.username,
+                    id: Date.now()
+                }
+            }
+
+        case 'GET_USER':
+            return {
+                ...state,
             }
 
         case 'SIGNOUT':
