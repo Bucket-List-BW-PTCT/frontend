@@ -6,12 +6,21 @@ import { Button } from 'reactstrap';
 
 const DivStyle = styled.div`
   margin: 10px auto;
-  width: 500px;
+  width: 450px;
   text-align: center;
   display: flex;
   flex-direction: column;
-  box-shadow: 5px 5px 8px #888888;
+  box-shadow: 4px 4px 7px #888888;
 `;
+
+const buttonStyle = {
+  color: "white",
+  background: "green",
+  width: "200px",
+  margin: "10px auto",
+  borderRadius: "10px",
+  boxShadow: "4px 4px 7px #888888"
+};
 
 const FormDiv = styled.div`
   display: flex;
@@ -21,13 +30,14 @@ const FormDiv = styled.div`
 `;
 
 const HeaderStyle = styled.h2`
-  color: grey;
+  color: green;
 `;
 
 function Login(props) {
-  const [form, setForm] = React.useState({  //sets state of the form to empty fields
-    username: '',   //user name is empty
-    password: ''  //password is empty
+  const [form, setForm] = React.useState({
+    //sets state of the form to empty fields
+    username: "", //user name is empty
+    password: "" //password is empty
   });
 
   const login = e => {
@@ -45,31 +55,33 @@ function Login(props) {
   };
 
   return (
-    <div textAlign='center'>
+    <div textAlign="center">
       <DivStyle>
         <FormDiv>
           <HeaderStyle>Log In</HeaderStyle>
 
-          <form onSubmit={login}>    {/* onsubmit calls the method login  */}
-            <div className='ui fluid input'>
+          <form onSubmit={login}>
+            {" "}
+            {/* onsubmit calls the method login  */}
+            <div className="ui fluid input">
               <input
-                name='username'
-                type='text'
+                name="username"
+                type="text"
                 value={form.username}
                 onChange={handleChanges}
-                placeholder='UserName'
+                placeholder="UserName"
               />
             </div>
-            <div className='ui fluid input'>
+            <div className="ui fluid input">
               <input
-                name='password' //input name
-                type='text' //input type
+                name="password" //input name
+                type="text" //input type
                 value={form.password} //the value of the input
                 onChange={handleChanges} //anytime the field changes it will call handlechanges which uses a method to input each keystroke
-                placeholder='Password' //input placeholder
+                placeholder="Password" //input placeholder
               />
             </div>
-            <Button type='submit' fluid>
+            <Button style={buttonStyle} type="submit" fluid>
               Login
             </Button>
           </form>
