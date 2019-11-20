@@ -36,7 +36,7 @@ const HeaderStyle = styled.h2`
 function AddBucketItem(props) {
   const [form, setForm] = React.useState({
     //sets state of the form to empty fields
-    title: "", //user name is empty
+    item_name: "", //user name is empty
     // description: "" //description is empty
   });
 
@@ -65,9 +65,9 @@ function AddBucketItem(props) {
             {/* onsubmit calls the method login  */}
             <div className="ui fluid input">
               <input
-                name="title"
+                name="item_name"
                 type="text"
-                value={form.title}
+                value={form.item_name}
                 onChange={handleChanges}
                 placeholder="title"
               />
