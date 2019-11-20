@@ -1,24 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import Signin from '../components/Signin';
 import Signup from '../components/Signup';
 
 function HomePage(props) {
     return (
         <div>
-            {props.loggedIn ? (
+            {props.isLoggedIn ? (
                 // <Home />
-                <div>
+                <h1>
                 HOME
-                </div>
+                </h1>
             ) : (
                 <div className='signin-signup'>
                 <Signin />
                 <Signup />
                 </div>
             )
-            }
+        }   
         </div>
     )
 }
 
-export default HomePage;
+function mapStateToProps(state) {
+    return {
+        ...state,
+        isLoggedIn: state.isLoggedIn
+    }
+}
+
+export default connect(mapStateToProps)(HomePage);

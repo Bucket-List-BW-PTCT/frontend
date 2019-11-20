@@ -1,7 +1,8 @@
-import React from "react";
-import axiosWithAuth from "../utils/axiosWithAuth";
-import styled from "styled-components";
-import { Button } from "reactstrap";
+import React from 'react';
+import { connect } from 'react-redux';
+import { signin } from '../actions/auth';
+import styled from 'styled-components';
+import { Button } from 'reactstrap';
 
 const DivStyle = styled.div`
   margin: 10px auto;
@@ -38,28 +39,19 @@ function Login(props) {
     username: "", //user name is empty
     password: "" //password is empty
   });
+
   const login = e => {
-    e.preventDefault(); //method stops the default action of an element from happening. For example: Prevent a submit button from submitting a form.
-    axiosWithAuth() //axioswithauth method that has been imported
-      .post("https://bw-bucketlist.herokuapp.com/api/users/login", form) //talks to the back-end and calls the url and sends the values of form.
-      .then(res => {
-        console.log(res); //console logs the response
-        localStorage.setItem("token", res.data.payload); //The payload is the body of your post request. The body is the second parameter (user) you are sending in with:
-      })
-      .catch(err => {
-        //catches an error, the block of code below is to be executed if an error occurs.
-        console.log(err.response); //console logs the error response
-        setForm({
-          //sets state of the form to empty fields after a bad request.
-          username: "", //user name is empty
-          password: "" //password is empty
-        });
-      });
+    e.preventDefault();  //method stops the default action of an element from happening. For example: Prevent a submit button from submitting a form. 
+    props.signin(form)
+    console.log(props.userInfo)
+    setForm({
+      username: '',
+      password: ''
+    })
   };
-  const handleChanges = e => {
-    //event object
-    setForm({ ...form, [e.target.name]: e.target.value }); //uses the spread operator to update the keys on our state object. It changes the value of username or pw one key at a time.
-    console.log(form); //console logs each keystore, can be removed.
+
+  const handleChanges = e => { //event object
+    setForm({ ...form, [e.target.name]: e.target.value });  //uses the spread operator to update the keys on our state object. It changes the value of username or pw one key at a time.
   };
 
   return (
@@ -99,4 +91,15 @@ function Login(props) {
   );
 }
 
-export default Login;
+function mapStateToProps(state) {
+  return {
+    ...state,
+    userInfo: {...state.userInfo}
+  }
+}
+
+const mapDispatchToProps= {
+  signin
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

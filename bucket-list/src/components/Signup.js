@@ -1,7 +1,8 @@
-import React from "react";
-import axiosWithAuth from "../utils/axiosWithAuth";
-import styled from "styled-components";
-import { Button } from "reactstrap";
+import React from 'react';
+import { signup, signin } from '../actions/auth';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
+import { Button } from 'reactstrap';
 
 const buttonStyle = {
   color: "white",
@@ -37,22 +38,13 @@ function Registration(props) {
     username: "",
     password: ""
   });
+
   const registration = e => {
     e.preventDefault();
-    axiosWithAuth()
-      .post("https://bw-bucketlist.herokuapp.com/api/users/register", form)
-      .then(res => {
-        console.log(res);
-        // localStorage.setItem("token", res.data.payload);
-      })
-      .catch(err => {
-        console.log(err.response);
-        setForm({
-          username: "",
-          password: ""
-        });
-      });
+    props.signup(form);
+    props.signin(form);
   };
+
   const handleChanges = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -91,4 +83,15 @@ function Registration(props) {
   );
 }
 
-export default Registration;
+function mapStateToProps(state) {
+  return {
+    ...state
+  }
+}
+
+const mapDispatchToProps = {
+  signup,
+  signin
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Registration);

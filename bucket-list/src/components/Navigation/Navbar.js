@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { signout } from '../../actions/auth';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   Collapse,
@@ -23,12 +25,12 @@ const Navigation = props => {
         <NavbarToggler onClick={toggleNavbar} className="mr-2" />
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
-            <NavItem>
+            <NavItem onClick={() => setCollapsed(!collapsed)}>
               <Link to='/' style={{ color: "#ffffff" }}>
                 Home
               </Link>
             </NavItem>
-            <NavItem>
+            <NavItem onClick={() => setCollapsed(!collapsed)}>
               <Link
                 to='/bucket-lists'
                 style={{ color: "#ffffff" }}
@@ -36,20 +38,15 @@ const Navigation = props => {
                 Bucket List's
               </Link>
             </NavItem>
-            <NavItem>
+            <NavItem onClick={() => {
+              setCollapsed(!collapsed)
+              props.signout();
+            }}>
               <Link
+                to='/bucket-lists'
                 style={{ color: "#ffffff" }}
-                to='/signin'
               >
-                Sign In
-              </Link>
-            </NavItem>
-            <NavItem>
-              <Link
-                style={{ color: "#ffffff" }}
-                to='/signup'
-              >
-                Sign Up
+                Log Out
               </Link>
             </NavItem>
           </Nav>
@@ -59,4 +56,14 @@ const Navigation = props => {
   );
 };
 
-export default Navigation;
+function mapStateToProps(state) {
+  return {
+    ...state
+  }
+}
+
+const mapDispatchToProps = {
+  signout
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
