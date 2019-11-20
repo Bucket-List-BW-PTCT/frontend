@@ -1,5 +1,5 @@
 import React from 'react';
-import { signup } from '../actions/auth';
+import axiosWithAuth from '../utils/axiosWithAuth';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Button } from 'reactstrap';
@@ -24,34 +24,37 @@ const HeaderStyle = styled.h2`
   color: grey;
 `;
 
-function Signup(props) {
+function Registration(props) {
   const [form, setForm] = React.useState({
-    username: '',
-    email: '',
-    password: ''
+    username: "",
+    password: ""
   });
-
-  const register = e => {
+  const registration = e => {
     e.preventDefault();
-    props.signup(form);
-    setForm({
-      username: '',
-      email: '',
-      password: ''
-    })
-  }
-
+    axiosWithAuth()
+      .post("https://bw-bucketlist.herokuapp.com/api/users/register", form)
+      .then(res => {
+        console.log(res);
+        // localStorage.setItem("token", res.data.payload);
+      })
+      .catch(err => {
+        console.log(err.response);
+        setForm({
+          username: "",
+          password: ""
+        });
+      });
+  };
   const handleChanges = e => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
   return (
     <div textAlign='center'>
       <DivStyle>
         <FormDiv>
           <HeaderStyle>Sign Up</HeaderStyle>
 
-          <form onSubmit={register}>
+          <form onSubmit={registration}>
             <div className='ui fluid input'>
               <input
                 name='username'
@@ -87,6 +90,7 @@ function Signup(props) {
       </DivStyle>
     </div>
   );
+
 }
 
 function mapStateToProps(state) {
@@ -95,8 +99,4 @@ function mapStateToProps(state) {
   }
 }
 
-const mapDispatchToProps= {
-  signup
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps)(Registration);
