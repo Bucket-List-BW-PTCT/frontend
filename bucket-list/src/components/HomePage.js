@@ -4,10 +4,11 @@ import Signin from '../components/Signin';
 import Signup from '../components/Signup';
 
 function HomePage(props) {
+    console.log(props);
     return (
         <div>
             {props.isLoggedIn ? (
-                // <Home />
+                // <Dashboard />
                 <h1>
                 HOME
                 </h1>
@@ -25,7 +26,8 @@ function HomePage(props) {
 function mapStateToProps(state) {
     return {
         ...state,
-        isLoggedIn: state.isLoggedIn
+        isLoggedIn: state.isLoggedIn,
+        userInfo: {...state.userInfo}
     }
 }
 
