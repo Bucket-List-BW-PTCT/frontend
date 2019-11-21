@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addBucket } from '../../actions/auth';
+import {  } from '../../actions/auth';
 import styled from 'styled-components';
 import { Button } from 'reactstrap';
 
@@ -42,7 +42,7 @@ function AddBucketItem(props) {
 
   const addBucket = e => {
     e.preventDefault();  //method stops the default action of an element from happening. For example: Prevent a submit button from submitting a form. 
-    props.addBucket(form)
+    
     console.log(props.userInfo)
     setForm({
       title: '',
@@ -101,7 +101,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps= {
-  addBucket
+  
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddBucketItem);

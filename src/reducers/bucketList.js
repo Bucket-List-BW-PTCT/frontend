@@ -28,7 +28,8 @@ export function reducer (state = initialState, action) {
                 ...state,
                 isLoggedIn: true,
                 userInfo: {
-                    ...action.payload
+                    ...action.payload,
+                    user_id: action.payload.username
                 }
             }
 
@@ -40,6 +41,13 @@ export function reducer (state = initialState, action) {
                     username: action.payload.username,
                     id: Date.now()
                 }
+            }
+
+        case 'SET_LOGGED_IN':
+            return {
+                ...state,
+                isLoggedIn: true,
+                userInfo: action.payload
             }
 
         case 'GET_USER':
@@ -55,6 +63,12 @@ export function reducer (state = initialState, action) {
             }
 
         default:
-            return state
+            console.log('DEFAULT TRIGGERED');
+            return {
+                ...state,
+                userInfo: {
+                    ...state.userInfo
+                }
+            }
     }
 }

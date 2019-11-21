@@ -2,6 +2,7 @@ import React from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { Redirect } from 'react-router-dom';
 export const SIGNIN = 'SIGNIN';
+export const SET_LOGGED_IN = 'SET_LOGGED_IN';
 export const SIGNUP = 'SIGNUP';
 export const SIGNOUT = 'SIGNOUT';
 export const GET_USER = 'GET_USER';
@@ -49,7 +50,11 @@ export function signup(userData) {
     };
 }
 
-
+export function setLoggedIn(userInfo) {
+    return dispatch => {
+        dispatch({ type: SET_LOGGED_IN, payload: userInfo });
+    }
+}
 
 export function signout() {
     return dispatch => {
