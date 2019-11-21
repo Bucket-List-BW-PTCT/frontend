@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addBucket } from '../../actions/auth';
+import { createList } from '../../actions/listHandlers';
 import styled from 'styled-components';
 import { Button } from 'reactstrap';
 
@@ -36,13 +36,13 @@ const HeaderStyle = styled.h2`
 function AddBucketItem(props) {
   const [form, setForm] = React.useState({
     //sets state of the form to empty fields
-    item_name: "", //user name is empty
+    listName: "", //user name is empty
     // description: "" //description is empty
   });
 
-  const addBucket = e => {
+  const addBucketList = e => {
     e.preventDefault();  //method stops the default action of an element from happening. For example: Prevent a submit button from submitting a form. 
-    props.addBucket(form)
+    props.createList(form)
     console.log(props.userInfo)
     setForm({
       title: '',
@@ -60,7 +60,7 @@ function AddBucketItem(props) {
         <FormDiv>
           <HeaderStyle>Add to BucketList</HeaderStyle>
 
-          <form onSubmit={addBucket}>
+          <form onSubmit={addBucketList}>
             {" "}
             {/* onsubmit calls the method login  */}
             <div className="ui fluid input">
@@ -101,7 +101,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps= {
-  addBucket
+  createList
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddBucketItem);
