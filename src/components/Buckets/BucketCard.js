@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 export default function BucketCard(props) {
   const classes = useStyles();
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} style={CardDivStyle}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -44,4 +44,10 @@ export default function BucketCard(props) {
       </CardActions>
     </Card>
   );
+}
+
+const CardDivStyle = {
+  margin: '10px',
+  border: '3px solid green',
+  boxShadow: '4px 4px 7px #888888'
 }
