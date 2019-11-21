@@ -36,14 +36,15 @@ const HeaderStyle = styled.h2`
 function AddBucketItem(props) {
   const [form, setForm] = React.useState({
     //sets state of the form to empty fields
-    listName: "", //user name is empty
+    title: '',
+    user_id: 1 //user name is empty
     // description: "" //description is empty
   });
 
   const addBucketList = e => {
     e.preventDefault();  //method stops the default action of an element from happening. For example: Prevent a submit button from submitting a form. 
     props.createList(form)
-    console.log(props.userInfo)
+    console.log(form)
     setForm({
       title: '',
     //   description: ''
@@ -65,23 +66,13 @@ function AddBucketItem(props) {
             {/* onsubmit calls the method login  */}
             <div className="ui fluid input">
               <input
-                name="item_name"
+                name="title"
                 type="text"
                 value={form.item_name}
                 onChange={handleChanges}
                 placeholder="title"
               />
             </div>
-
-            {/* <div className="ui fluid input">
-              <input
-                name="description" //input name
-                type="text" //input type
-                value={form.description} //the value of the input
-                onChange={handleChanges} //anytime the field changes it will call handlechanges which uses a method to input each keystroke
-                placeholder="description" //input placeholder
-              />
-            </div> */}
             
             <Button style={buttonStyle} type="submit" fluid>
               Add Bucket

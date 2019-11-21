@@ -50,15 +50,17 @@ export function signup(userData) {
     };
 }
 
-export function setLoggedIn(userInfo) {
+export function setLoggedIn() {
     return dispatch => {
-        dispatch({ type: SET_LOGGED_IN, payload: userInfo });
+        dispatch({ type: SET_LOGGED_IN });
     }
 }
 
 export function signout() {
     return dispatch => {
         localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        localStorage.removeItem('id');
         dispatch({ type: SIGNOUT })
     }
 }
