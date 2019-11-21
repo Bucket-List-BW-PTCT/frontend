@@ -1,24 +1,7 @@
 const initialState = {
     isLoggedIn: false,
     userInfo: {},
-    bucketLists: [
-        {
-            listName: 'My BucketList',
-            id: 0,
-            listItems: ['Graduate Lambda', 'Code Facebook'],
-            created_by: 'Cole',
-            private: false,
-            shared_with: []
-        },
-        {
-            listName: 'Another BucketList',
-            id: 1,
-            listItems: ['Go skydiving', 'Buy a jet'],
-            created_by: 'Greg',
-            private: false,
-            shared_with: []
-        }
-    ]
+    bucketLists: []
 }
 
 export function reducer (state = initialState, action) {
@@ -62,13 +45,16 @@ export function reducer (state = initialState, action) {
                 userInfo: {}
             }
 
+        case 'GET_LISTS':
+            return {
+                ...state,
+                bucketLists: action.payload
+            }
+
         default:
             console.log('DEFAULT TRIGGERED');
             return {
-                ...state,
-                userInfo: {
-                    ...state.userInfo
-                }
+                ...state
             }
     }
 }

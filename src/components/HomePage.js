@@ -5,12 +5,15 @@ import { setLoggedIn } from '../actions/auth';
 import BucketAdd from '../components/Buckets/BucketAdd';
 import Signin from '../components/Signin';
 import Signup from '../components/Signup';
+import BucketLists from './BucketLists';
 
 function HomePage(props) {
     console.log(props);
     useEffect(() => {
         if(localStorage.getItem('token')) {
-            props.setLoggedIn(props.userInfo);
+            props.setLoggedIn();
+            localStorage.setItem('userInfo', props.userInfo.username);
+            localStorage.setItem('id', props.userInfo.id)
         }
     }, [])
 
@@ -21,16 +24,7 @@ function HomePage(props) {
                 <div className='dashboard'>
                     <h1>HOME</h1>
 
-                    {props.bucketLists.map((list) => (
-                        <div className='list-card'>
-                            <h3 key={list.id}>{list.listName}</h3>
-                            <ul>
-                                {list.listItems.map((item) => (
-                                    <h4 key={item.id}>{item}</h4>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
+                    <BucketLists />
 
                     <BucketAdd />
                 </div>
