@@ -49,6 +49,17 @@ function AddBucketItem(props) {
     })
   };
 
+  const validateAddition = e => {
+    e.preventDefault();
+    let listToAdd = form.title;
+    if(listToAdd.length < 3) {
+      alert('List Title must be at least 3 characters long!');
+      return
+    } else {
+      addBucketList(e);
+    }
+  }
+
   const handleChanges = e => { //event object
     setForm({ ...form, [e.target.name]: e.target.value });  //uses the spread operator to update the keys on our state object. It changes the value of title or pw one key at a time.
   };
@@ -59,7 +70,7 @@ function AddBucketItem(props) {
         <FormDiv>
           <HeaderStyle>Add to BucketList</HeaderStyle>
 
-          <form onSubmit={addBucketList}>
+          <form onSubmit={validateAddition}>
             {" "}
             {/* onsubmit calls the method login  */}
             <div className="ui fluid input">
