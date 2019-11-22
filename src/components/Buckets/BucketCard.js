@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 export default function BucketCard(props) {
   const classes = useStyles();
   return (
-    <Card className={classes.card} style={CardDivStyle}>
+    <Card className={classes.card}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -38,8 +38,8 @@ export default function BucketCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-      <IconButton aria-label="share">
-          <DeleteIcon onClick={() => props.deleteList(props.id)} />
+        <IconButton aria-label='share'>
+          <DeleteIcon />
         </IconButton>
         <IconButton aria-label='share'>
           <Modal />
