@@ -36,7 +36,7 @@ export default function BucketCard(props) {
       </CardActionArea>
       <CardActions>
       <IconButton aria-label="share">
-          <DeleteIcon />
+          <DeleteIcon onClick={() => props.deleteList(props.id)} />
         </IconButton>
         <IconButton aria-label="share">
           <EditIcon />
