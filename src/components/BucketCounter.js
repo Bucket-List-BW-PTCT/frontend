@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Badge, Button } from "reactstrap";
-import axios from "axios";
 
 let styleCounter = {
   display: "flex",

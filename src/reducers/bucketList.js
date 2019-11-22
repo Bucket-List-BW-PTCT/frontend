@@ -52,7 +52,6 @@ export function reducer (state = initialState, action) {
             }
 
         default:
-            console.log('DEFAULT TRIGGERED');
             return {
                 ...state
             }

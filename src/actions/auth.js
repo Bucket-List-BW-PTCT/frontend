@@ -12,8 +12,6 @@ export function getUser(user_id) {
         return axiosWithAuth()
         .get(`{https://bw-bucketlist.herokuapp.com/api/users/${user_id}}`)
         .then((res) => {
-            console.log('Getting user...');
-            console.log(res);
             dispatch({ type: GET_USER })
         })
     }
@@ -24,7 +22,6 @@ export function signin(userData) {
         axiosWithAuth() //axioswithauth method that has been imported
         .post('https://bw-bucketlist.herokuapp.com/api/users/login', userData)  //talks to the back-end and calls the url and sends the values of form.
         .then(res => {
-            console.log(res); //console logs the response
             dispatch({ type: SIGNIN, payload: userData })
             localStorage.setItem('token', res.data.token); //The payload is the body of your post request. The body is the second parameter (user) you are sending in with:
             return <Redirect to='/' />

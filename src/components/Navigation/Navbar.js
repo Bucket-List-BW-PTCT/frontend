@@ -14,9 +14,7 @@ import {
 
 const Navigation = props => {
   const [collapsed, setCollapsed] = useState(true);
-
   const toggleNavbar = () => setCollapsed(!collapsed);
-  console.log('Nav props', props);
 
   return (
     <div>

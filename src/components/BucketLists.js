@@ -8,9 +8,7 @@ function BucketLists(props) {
     useEffect(() => {
         props.getLists();
     }, [])
-
-    console.log('!!!!', props);
-
+    
     return (
         <div className='bucket-list-page'>
             <h1>Bucket Lists</h1>
