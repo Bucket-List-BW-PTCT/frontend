@@ -18,7 +18,7 @@ function BucketLists(props) {
             <div className='list-wrapper'>
                 {props.bucketLists.map((list) => (
                     <BucketCard key={list.id} username={list.created_by} title={list.title} id={list.id} deleteList={props.deleteList} />
-                ))};
+                ))}
 
             </div>
         </div>
