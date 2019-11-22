@@ -56,11 +56,11 @@ export function setLoggedIn() {
     }
 }
 
-export function signout() {
+export function signout(props) {
     return dispatch => {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
         localStorage.removeItem('id');
-        dispatch({ type: SIGNOUT })
+        dispatch({ type: SIGNOUT });
     }
 }

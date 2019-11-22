@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withRouter } from 'react-router-dom';
 import { signout } from '../../actions/auth';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -15,6 +16,7 @@ const Navigation = props => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
+  console.log('Nav props', props);
 
   return (
     <div>
@@ -43,7 +45,7 @@ const Navigation = props => {
               props.signout();
             }}>
               <Link
-                to='/bucket-lists'
+                to='/'
                 style={{ color: "#ffffff" }}
               >
                 Log Out
@@ -66,4 +68,4 @@ const mapDispatchToProps = {
   signout
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Navigation));
