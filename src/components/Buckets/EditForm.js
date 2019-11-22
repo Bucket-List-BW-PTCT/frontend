@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createList } from "../../actions/listHandlers";
+import { createList, updateList } from "../../actions/listHandlers";
 import styled from "styled-components";
 import { Button } from "reactstrap";
 
@@ -35,21 +35,13 @@ const HeaderStyle = styled.h2`
 
 function EditForm(props) {
   const [form, setForm] = React.useState({
-    //sets state of the form to empty fields
     title: "",
-    user_id: 1 //user name is empty
-    // description: "" //description is empty
   });
 
-  const addBucketList = e => {
-    e.preventDefault(); //method stops the default action of an element from happening. For example: Prevent a submit button from submitting a form.
-    props.createList(form);
-    console.log(form);
-    setForm({
-      title: ""
-      //   description: ''
-    });
-  };
+  const updateBucketList = e => {
+    e.preventDefault();
+    props.updateList(props.list_id, form);
+  }
 
   const handleChanges = e => {
     //event object
@@ -62,20 +54,20 @@ function EditForm(props) {
         <FormDiv>
           <HeaderStyle>Edit BucketList</HeaderStyle>
 
-          <form onSubmit={addBucketList}>
+          <form onSubmit={updateBucketList}>
             {" "}
             {/* onsubmit calls the method login  */}
             <div className="ui fluid input">
               <input
                 name="title"
                 type="text"
-                value={form.item_name}
+                value={form.title}
                 onChange={handleChanges}
                 placeholder="title"
               />
             </div>
             <Button style={buttonStyle} type="submit" fluid>
-              Add Bucket
+              Submit
             </Button>
           </form>
         </FormDiv>
@@ -92,7 +84,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  createList
+  createList,
+  updateList
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditForm);

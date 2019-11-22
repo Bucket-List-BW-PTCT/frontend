@@ -8,7 +8,6 @@ export function createList(listName) {
     return function(dispatch) {
         axiosWithAuth().post(`${url}/buckets`, listName)
         .then((res) => {
-            console.log('List submitted, ', res);
             dispatch({ type: ADD_LIST, payload: listName })
             window.location.reload();
         })
@@ -22,7 +21,6 @@ export function getLists() {
     return dispatch => {
         axiosWithAuth().get(`${url}/buckets`)
         .then((res) => {
-            console.log('GET LISTS', res.data);
             dispatch({ type: GET_LISTS, payload: res.data })
         })
         .catch((err) => {

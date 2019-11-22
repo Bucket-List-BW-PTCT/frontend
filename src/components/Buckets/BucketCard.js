@@ -1,5 +1,7 @@
 import React from "react";
+import { connect } from 'react-redux';
 import { makeStyles } from "@material-ui/core/styles";
+import { updateList } from '../../actions/listHandlers';
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -8,7 +10,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
 import Modal from "./Modal";
 
 const useStyles = makeStyles({
@@ -20,7 +21,13 @@ const useStyles = makeStyles({
   }
 });
 
-export default function BucketCard(props) {
+const CardDivStyle = {
+  margin: "10px",
+  border: "3px solid green",
+  boxShadow: "4px 4px 7px #888888"
+};
+
+function BucketCard(props) {
   const classes = useStyles();
   return (
     <Card className={classes.card} style={CardDivStyle}>
@@ -41,15 +48,21 @@ export default function BucketCard(props) {
           <DeleteIcon onClick={() => props.deleteList(props.id)} />
         </IconButton>
         <IconButton aria-label="share">
-          <Modal />
+          <Modal list_id={props.id} />
         </IconButton>
       </CardActions>
     </Card>
   );
 }
 
-const CardDivStyle = {
-  margin: "10px",
-  border: "3px solid green",
-  boxShadow: "4px 4px 7px #888888"
-};
+function mapStateToProps(state) {
+  return {
+    ...state
+  }
+}
+
+const mapDispatchToProps = {
+  updateList
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BucketCard);
