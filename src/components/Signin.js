@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { signin, getUser } from '../actions/auth';
-import styled from 'styled-components';
-import { Button } from 'reactstrap';
+import React from "react";
+import { connect } from "react-redux";
+import { signin, getUser } from "../actions/auth";
+import styled from "styled-components";
+import { Button } from "reactstrap";
 
 const DivStyle = styled.div`
   margin: 10px auto;
@@ -41,17 +41,18 @@ function Login(props) {
   });
 
   const login = e => {
-    e.preventDefault();  //method stops the default action of an element from happening. For example: Prevent a submit button from submitting a form. 
-    props.signin(form)
+    e.preventDefault(); //method stops the default action of an element from happening. For example: Prevent a submit button from submitting a form.
+    props.signin(form);
     setForm({
-      username: '',
-      password: ''
-    })
-    props.getUser(props.userInfo.id)
+      username: "",
+      password: ""
+    });
+    props.getUser(props.userInfo.id);
   };
 
-  const handleChanges = e => { //event object
-    setForm({ ...form, [e.target.name]: e.target.value });  //uses the spread operator to update the keys on our state object. It changes the value of username or pw one key at a time.
+  const handleChanges = e => {
+    //event object
+    setForm({ ...form, [e.target.name]: e.target.value }); //uses the spread operator to update the keys on our state object. It changes the value of username or pw one key at a time.
   };
 
   return (
@@ -73,7 +74,6 @@ function Login(props) {
                 required
               />
             </div>
-
             <div className="ui fluid input">
               <input
                 name="password" //input name
@@ -84,7 +84,6 @@ function Login(props) {
                 required
               />
             </div>
-            
             <Button style={buttonStyle} type="submit" fluid>
               Login
             </Button>
@@ -98,13 +97,13 @@ function Login(props) {
 function mapStateToProps(state) {
   return {
     ...state,
-    userInfo: {...state.userInfo}
-  }
+    userInfo: { ...state.userInfo }
+  };
 }
 
-const mapDispatchToProps= {
+const mapDispatchToProps = {
   signin,
-  getUser 
-}
+  getUser
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
