@@ -10,7 +10,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
 import Modal from "./Modal";
 
 const useStyles = makeStyles({
@@ -49,7 +48,7 @@ function BucketCard(props) {
           <DeleteIcon onClick={() => props.deleteList(props.id)} />
         </IconButton>
         <IconButton aria-label="share">
-          <Modal />
+          <Modal list_id={props.id} />
         </IconButton>
       </CardActions>
     </Card>

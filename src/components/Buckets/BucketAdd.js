@@ -44,10 +44,8 @@ function AddBucketItem(props) {
   const addBucketList = e => {
     e.preventDefault();  //method stops the default action of an element from happening. For example: Prevent a submit button from submitting a form. 
     props.createList(form)
-    console.log(form)
     setForm({
-      title: '',
-    //   description: ''
+      title: ''
     })
   };
 

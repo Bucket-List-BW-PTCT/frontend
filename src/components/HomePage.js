@@ -8,7 +8,6 @@ import Signup from '../components/Signup';
 import BucketLists from './BucketLists';
 
 function HomePage(props) {
-    console.log(props);
     useEffect(() => {
         if(localStorage.getItem('token')) {
             props.setLoggedIn();

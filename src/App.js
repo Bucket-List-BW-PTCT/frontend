@@ -19,9 +19,8 @@ function App(props) {
       <Route exact path='/signup' component={Signup} />
 
       <Route exact path='/' component={HomePage} />
-      {/* <ProtectedRoute exact path='/bucket-lists' component={BucketLists} /> */}
+      <ProtectedRoute exact path='/bucket-lists' component={BucketLists} />
       <Footer />
-      <Modal />
     </div>
   );
 }
