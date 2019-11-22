@@ -104,7 +104,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps= {
   signin,
-  getUser
+  getUser 
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
