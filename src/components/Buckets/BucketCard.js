@@ -1,5 +1,7 @@
 import React from "react";
+import { connect } from 'react-redux';
 import { makeStyles } from "@material-ui/core/styles";
+import { updateList } from '../../actions/listHandlers';
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -20,7 +22,13 @@ const useStyles = makeStyles({
   }
 });
 
-export default function BucketCard(props) {
+const CardDivStyle = {
+  margin: "10px",
+  border: "3px solid green",
+  boxShadow: "4px 4px 7px #888888"
+};
+
+function BucketCard(props) {
   const classes = useStyles();
   return (
     <Card className={classes.card} style={CardDivStyle}>
@@ -48,8 +56,14 @@ export default function BucketCard(props) {
   );
 }
 
-const CardDivStyle = {
-  margin: "10px",
-  border: "3px solid green",
-  boxShadow: "4px 4px 7px #888888"
-};
+function mapStateToProps(state) {
+  return {
+    ...state
+  }
+}
+
+const mapDispatchToProps = {
+  updateList
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BucketCard);

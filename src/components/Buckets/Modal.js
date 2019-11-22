@@ -57,7 +57,7 @@ export default function SimpleModal() {
         onClose={handleClose}
       >
         <div style={modalStyle} className={classes.paper}>
- <BucketAdd />
+            <BucketAdd />
         </div>
       </Modal>
     </div>
