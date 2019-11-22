@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { signin, getUser } from "../actions/auth";
 import styled from "styled-components";
@@ -7,7 +7,6 @@ import { Button } from "reactstrap";
 const DivStyle = styled.div`
   margin: 10px auto;
   width: 450px;
-  text-align: center;
   display: flex;
   flex-direction: column;
   box-shadow: 4px 4px 7px #888888;
@@ -39,8 +38,16 @@ function Login(props) {
     username: "", //user name is empty
     password: "" //password is empty
   });
+  const validateForm = () => {
+    let username = form.username;
+    if (username.length < 5) {
+      alert("Longer username needed");
+    }
+  };
+  const [userError, setUserError] = useState();
 
   const login = e => {
+    validateForm();
     e.preventDefault(); //method stops the default action of an element from happening. For example: Prevent a submit button from submitting a form.
     props.signin(form);
     setForm({
