@@ -8,17 +8,20 @@ import Signin from './components/Signin';
 import Signup from './components/Signup';
 import Footer from './components/Footer';
 import { Route } from 'react-router-dom';
+import Modal from './components/Buckets/Modal';
 import './App.css';
 
 function App(props) {
   return (
-    <div className="App">
+    <div className='App'>
       <Navbar />
       <Route exact path='/signin' component={Signin} />
       <Route exact path='/signup' component={Signup} />
+
       <Route exact path='/' component={HomePage} />
       {/* <ProtectedRoute exact path='/bucket-lists' component={BucketLists} /> */}
       <Footer />
+      <Modal />
     </div>
   );
 }
@@ -26,15 +29,11 @@ function App(props) {
 function mapStateToProps(state) {
   return {
     ...state,
-    userInfo: {...state.userInfo},
-    bucketLists: [
-      ...state.bucketLists
-    ]
-  }
+    userInfo: { ...state.userInfo },
+    bucketLists: [...state.bucketLists]
+  };
 }
 
-const mapDispatchToProps = {
-  
-};
+const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
