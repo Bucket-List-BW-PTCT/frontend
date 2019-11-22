@@ -10,6 +10,7 @@ export function createList(listName) {
         .then((res) => {
             console.log('List submitted, ', res);
             dispatch({ type: ADD_LIST, payload: listName })
+            window.location.reload();
         })
         .catch((err) => {
             console.log(err);
@@ -23,6 +24,30 @@ export function getLists() {
         .then((res) => {
             console.log('GET LISTS', res.data);
             dispatch({ type: GET_LISTS, payload: res.data })
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+}
+
+export function deleteList(list_id) {
+    return dispatch => {
+        axiosWithAuth().delete(`${url}/buckets/${list_id}`)
+        .then((res) => {
+            window.location.reload();
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+}
+
+export function updateList(list_id ,formData) {
+    return dispatch => {
+        axiosWithAuth().put(`${url}/buckets/${list_id}`)
+        .then((res) => {
+            return
         })
         .catch((err) => {
             console.log(err);
