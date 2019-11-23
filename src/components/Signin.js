@@ -84,7 +84,7 @@ function Login(props) {
             <div className="ui fluid input">
               <input
                 name="password" //input name
-                type="text" //input type
+                type="password" //input type
                 value={form.password} //the value of the input
                 onChange={handleChanges} //anytime the field changes it will call handlechanges which uses a method to input each keystroke
                 placeholder="Password" //input placeholder
