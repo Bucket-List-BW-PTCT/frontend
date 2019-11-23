@@ -66,5 +66,5 @@ const StyledHeader = styled.h2`
   border-bottom: 1px solid green;
   border-top: 1px solid green;
   padding: 20px;
-  margin-top: -50px;
+  margin-top: -10px;
 `;
