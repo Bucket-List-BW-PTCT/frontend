@@ -1,7 +1,7 @@
 import React from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { updateList } from '../../actions/listHandlers';
+import { updateList } from "../../actions/listHandlers";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -34,7 +34,7 @@ function BucketCard(props) {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image="https://i.gyazo.com/91e6545d64ab0a2a14eb2c596f0e29c8.png"
+          image="https://i.gyazo.com/5c32bda440d33c7f4e5f8bf76cbd7d4c.png"
           title={props.title}
         />
         <CardContent>
@@ -58,11 +58,11 @@ function BucketCard(props) {
 function mapStateToProps(state) {
   return {
     ...state
-  }
+  };
 }
 
 const mapDispatchToProps = {
   updateList
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(BucketCard);
