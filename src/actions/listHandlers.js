@@ -43,7 +43,7 @@ export function deleteList(list_id) {
 
 export function updateList(list_id ,formData) {
     return dispatch => {
-        axiosWithAuth().put(`${url}/buckets/${list_id}`)
+        axiosWithAuth().put(`${url}/buckets/${list_id}`, formData)
         .then((res) => {
             return
         })
